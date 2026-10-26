@@ -32,9 +32,21 @@ button:active,.btn-a:active{transform:scale(.95)}button:disabled{opacity:.4;poin
 .acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.acts button,.acts .btn-a{flex:1;min-width:76px}
 .big{display:block;margin:8px auto;background:var(--gf);color:var(--ink);padding:14px 40px;font-size:17px;font-weight:800;box-shadow:0 4px 12px #0002}
 .bl{background:var(--bl);color:var(--ink)}
-#tt{position:fixed;left:50%;bottom:76px;transform:translate(-50%,10px);width:calc(100vw - 24px);max-width:456px;background:var(--pn);border:1px solid var(--ln);border-radius:20px;padding:8px 14px;display:flex;gap:8px;align-items:center;opacity:0;pointer-events:none;transition:opacity .35s,transform .35s;z-index:20;box-shadow:0 4px 14px #0003;font-size:13px}
-#tt.on{opacity:1;transform:translate(-50%,0)}#tt b{background:var(--gf);color:var(--ink);border-radius:999px;padding:3px 10px;white-space:nowrap}
+
+/* POPUP BANDAR DENGAN ANIMASI SHAKE */
+#tt{position:fixed;left:50%;bottom:76px;transform:translate(-50%,10px);width:calc(100vw - 24px);max-width:456px;background:var(--pn);border:1px solid var(--ln);border-radius:20px;padding:8px 14px;display:flex;gap:8px;align-items:center;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:20;box-shadow:0 4px 14px #0003;font-size:13px;will-change:transform,opacity}
+#tt.on{opacity:1;transform:translate(-50%,0);animation:ttShake .42s cubic-bezier(.36,.07,.19,.97)}
+@keyframes ttShake{
+  0%{transform:translate(-50%,14px) scale(.92)}
+  30%{transform:translate(calc(-50% - 6px),0) rotate(-1.5deg)}
+  50%{transform:translate(calc(-50% + 6px),0) rotate(1.5deg)}
+  70%{transform:translate(calc(-50% - 3px),0) rotate(-.8deg)}
+  85%{transform:translate(calc(-50% + 3px),0) rotate(.5deg)}
+  100%{transform:translate(-50%,0) rotate(0)}
+}
+#tt b{background:var(--gf);color:var(--ink);border-radius:999px;padding:3px 10px;white-space:nowrap}
 #tt div{display:flex;flex-direction:column;min-width:0;flex:1}#tt em{font-style:normal;font-size:11px;color:var(--gd);font-weight:700}#tt .av{width:34px;height:34px}
+
 footer{position:fixed;left:0;right:0;bottom:0;z-index:9;padding:0 12px 8px;background:linear-gradient(transparent,var(--bg) 25%)}
 .ft{max-width:480px;margin:0 auto}
 .tk{display:none}
@@ -109,7 +121,7 @@ header>button{padding:8px 10px}
 </head>
 <body>
 
-<!-- 1. LOADING SCREEN (Otomatis hilang setelah 1.1 detik dengan CSS) -->
+<!-- 1. LOADING SCREEN -->
 <div class="scr" id="loadScr">
   <div class="card-box">
     <div class="logo-badge">♠</div>
@@ -121,7 +133,7 @@ header>button{padding:8px 10px}
   </div>
 </div>
 
-<!-- 2. START MENU (Tampil langsung begitu Loading selesai) -->
+<!-- 2. START MENU -->
 <div class="scr" id="startScr">
   <div class="card-box">
     <div class="logo-badge">🎰</div>
@@ -212,7 +224,7 @@ header>button{padding:8px 10px}
       <button type="button" class="bad" id="setReset">Reset ↺</button>
     </div>
     <div class="set-row">
-      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.2</small></div>
+      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.3</small></div>
       <button type="button" class="bl" id="btnCheckUpd">Cek Update</button>
     </div>
     <button type="button" class="big" style="width:100%;margin:14px 0 0;padding:11px" id="btnSaveSet">Simpan & Tutup</button>
@@ -272,11 +284,10 @@ var DB = {
   }
 };
 
-// Bersihkan cache OTA v1 lama yang menyebabkan layar macet
 DB.del("cw_ota_ver");
 DB.del("cw_ota_html");
 
-var APP_VERSION = "1.0.2";
+var APP_VERSION = "1.0.3";
 var UPDATE_JSON_URL = "https://raw.githubusercontent.com/rafaauliaardana/casino-update/main/version.json";
 
 function compareVer(v1, v2) {
@@ -336,13 +347,20 @@ var deck=function(n){var d=[];for(var k=0;k<n;k++)for(var i=0;i<RK.length;i++)fo
 var cd=function(c,x){x=x||"";return c?'<div class="cd '+("♥♦".indexOf(c[1])>=0?"r":"")+' '+x+'"><b>'+(c[0]=="T"?10:c[0])+'</b><i>'+c[1]+'</i></div>':'<div class="cd bk"></div>'};
 
 function theme(t){S.theme=t||S.theme;var r=document.documentElement;S.theme=="auto"?r.removeAttribute("data-theme"):r.dataset.theme=S.theme;save()}
+
+/* FUNGSI TOAST POPUP BANDAR DENGAN RE-TRIGGER SHAKE */
 function toast(mv,t,c){
   if(!S.chat&&t){t=""}
   if(!mv&&!t)return;
   var e=$('#tt');if(!e)return;
+  e.className='';
+  void e.offsetWidth;
   e.innerHTML=(c&&t?"<span class='av' style='background:"+c[1]+"'>"+c[0][0]+"</span>":"")+(mv?"<b>"+mv+"</b>":"")+(t?"<div>"+(c?"<em>"+c[0]+"</em>":"")+"<span>“"+t+"”</span></div>":"");
-  e.className='on';clearTimeout(toast.h);toast.h=setTimeout(function(){e.className=''},Math.min(5500,2400+30*(t||'').length));
+  e.className='on';
+  clearTimeout(toast.h);
+  toast.h=setTimeout(function(){e.className=''},Math.min(5500,2400+30*(t||'').length));
 }
+
 function say(ev,mv,x){
   var c=CH[S.g]||CH.slots;
   var data=Object.assign({duit:S.bal,taruhan:S.bet,streak:S.streak},x||{});
