@@ -68,7 +68,7 @@ header>button{padding:8px 10px}
 .rr{display:flex;gap:10px;align-items:center;width:100%}.rb{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:20px;background:var(--p2);color:var(--tx);border:3px solid var(--gf);flex:none}.rb.r,.n.r{background:#c9525c;color:#fff}.rb.k,.n.k{background:#4a5266;color:#fff}.rb.g,.n.g{background:#3f9170;color:#fff}.rhh{display:flex;gap:4px;flex-wrap:wrap}.rhh i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}.rhh i.r{background:#c9525c}.rhh i.k{background:#4a5266}.rhh i.g{background:#3f9170}.bd{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;width:100%}.od{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;width:100%}.n{position:relative;border-radius:9px;padding:6px 0;font-size:13px;font-weight:700;background:var(--pn);color:var(--tx)}.n.g[data-k='0']{grid-column:1/-1}.n[data-c]::after{content:attr(data-c);position:absolute;top:-6px;right:-3px;background:var(--gf);color:var(--ink);border-radius:999px;font-size:10px;padding:1px 6px;font-weight:800;pointer-events:none}.n.w{outline:3px solid var(--gf)}
 
 /* === LAYAR MENU & LOADING === */
-.scr{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.scr{position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;padding:20px;overflow-y:auto}.scr>.card-box{margin:auto}
 #loadScr{z-index:60;pointer-events:none!important;animation:autoHideLoad .25s ease .8s forwards}
 @keyframes autoHideLoad{to{opacity:0;visibility:hidden;display:none}}
 
@@ -105,7 +105,7 @@ header>button{padding:8px 10px}
 .gm-dlr i{width:10px;height:10px;border-radius:50%;display:inline-block}
 
 /* MODAL SETTINGS & UPDATE */
-.mdl-bg{position:fixed;inset:0;z-index:80;background:#0007;display:none;place-items:center;padding:16px}
+.mdl-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:80;background:#0007;display:none;place-items:center;padding:16px}
 .mdl-bg.on{display:grid!important}
 .mdl{width:100%;max-width:400px;background:var(--pn);border:1px solid var(--ln);border-radius:26px;padding:20px 18px;box-shadow:0 10px 30px #0005}
 .mdl-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -137,7 +137,7 @@ header>button{padding:8px 10px}
   <div class="card-box">
     <div class="logo-badge">🎰</div>
     <h1 class="title-lg">♠ CASINO OFFLINE</h1>
-    <p class="sub-lg">5 Permainan Kasino Klasik · Tanpa Iklan</p>
+    <p class="sub-lg">5 Permainan Kasino Klasik · Tanpa Iklan · build A1</p>
     <div class="felt" style="min-height:110px;margin:10px 0 16px;padding:12px">
       <div class="row" style="min-height:auto">
         <div class="cd sm"><b>A</b><i>♠</i></div>
@@ -288,7 +288,7 @@ DB.del("cw_ota_html");
 DB.del("cw_ota_v2_ver");
 DB.del("cw_ota_v2_html");
 
-var APP_VERSION = "1.0.5";
+var APP_VERSION = "1.0.6";
 var UPDATE_JSON_URL = "https://raw.githubusercontent.com/rafaauliaardana/casino-update/main/version.json";
 
 function compareVer(v1, v2) {
@@ -815,6 +815,7 @@ var T={
 };
 $("#nv").innerHTML=Object.keys(T).map(function(k){return'<button type="button" onclick="uiPickGame(\''+k+'\')" data-k="'+k+'">'+T[k][0]+'</button>'}).join("");
 
+var BOOT=1;
 function go(){
   if(!T[S.g])S.g="slots";
   var nav=$("#nv");
@@ -828,7 +829,7 @@ function go(){
   var dlr=CH[S.g]||CH.slots;
   if($("#nm"))$("#nm").textContent=dlr[0];
   var a=$("#av");if(a){a.textContent=dlr[0][0];a.style.background=dlr[1]}
-  say("greet");
+  if(!BOOT)say("greet");
 }
 
 /* === FUNGSI NAVIGASI LANGSUNG & ANTI-MACET === */
@@ -993,7 +994,7 @@ draw();
 renderLobbyList();
 syncSettingsUI();
 go();
-setTimeout(removeLoader,850);
+setTimeout(removeLoader,850);BOOT=0;window.onerror=function(m,s,l){try{toast("Error baris "+l+": "+m)}catch(e){}};
 checkAppUpdate(false);
 </script>
 </body>
