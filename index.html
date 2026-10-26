@@ -12,11 +12,11 @@
 body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;overflow-x:hidden}
 .wrap{max-width:480px;margin:0 auto;padding:0 12px 150px}
 header{position:sticky;top:0;z-index:9;display:flex;align-items:center;gap:6px;background:var(--pn);margin:0 -12px;padding:10px 12px;border-radius:0 0 20px 20px;box-shadow:0 2px 10px #0002}
-header .lg{color:var(--gd);font-weight:800;font-size:13px;white-space:nowrap;cursor:pointer;display:flex;align-items:center;gap:4px}
+header .lg{color:var(--gd);font-weight:800;font-size:13px;white-space:nowrap;cursor:pointer;display:flex;align-items:center;gap:4px;text-decoration:none}
 .bal{flex:1;font-weight:700;font-size:17px;position:relative;white-space:nowrap;padding-left:2px}
 #dl{position:absolute;left:2px;top:-13px;font-size:12px;opacity:0;transition:opacity .4s;font-style:normal;font-weight:800}.up{color:var(--ok)}.dn{color:var(--bad)}
-button{font:inherit;border:0;border-radius:999px;background:var(--p2);color:var(--tx);padding:8px 14px;font-weight:600;cursor:pointer;transition:transform .08s,filter .15s}
-button:active{transform:scale(.95)}button:disabled{opacity:.4;pointer-events:none}
+button,.btn-a{font:inherit;border:0;border-radius:999px;background:var(--p2);color:var(--tx);padding:8px 14px;font-weight:600;cursor:pointer;transition:transform .08s,filter .15s;text-decoration:none;display:inline-block;text-align:center}
+button:active,.btn-a:active{transform:scale(.95)}button:disabled{opacity:.4;pointer-events:none}
 .step{display:flex;align-items:center;gap:3px;background:var(--p2);border-radius:999px;padding:3px}
 .step button{width:30px;height:30px;padding:0;background:var(--pn);font-size:17px}.step span{min-width:42px;text-align:center;font-weight:700;font-size:14px}
 .felt{background:var(--fl);border-radius:26px;padding:18px 10px;margin:14px 0 8px;display:flex;flex-direction:column;gap:10px;align-items:center;min-height:200px;justify-content:center;box-shadow:inset 0 2px 8px #00000018}
@@ -29,7 +29,7 @@ button:active{transform:scale(.95)}button:disabled{opacity:.4;pointer-events:non
 @keyframes pop{from{transform:scale(.8);opacity:0}}
 .lab{font-size:12px;color:var(--cd);font-weight:700;align-self:flex-start;padding-left:6px}
 .msg{text-align:center;font-weight:700;color:var(--gd);margin:6px 0;min-height:22px}.hint{text-align:center;color:var(--mu);font-size:12px;margin:4px 0}
-.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.acts button{flex:1;min-width:76px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.acts button,.acts .btn-a{flex:1;min-width:76px}
 .big{display:block;margin:8px auto;background:var(--gf);color:var(--ink);padding:14px 40px;font-size:17px;font-weight:800;box-shadow:0 4px 12px #0002}
 .bl{background:var(--bl);color:var(--ink)}
 #tt{position:fixed;left:50%;bottom:76px;transform:translate(-50%,10px);width:calc(100vw - 24px);max-width:456px;background:var(--pn);border:1px solid var(--ln);border-radius:20px;padding:8px 14px;display:flex;gap:8px;align-items:center;opacity:0;pointer-events:none;transition:opacity .35s,transform .35s;z-index:20;box-shadow:0 4px 14px #0003;font-size:13px}
@@ -55,16 +55,19 @@ select{font:inherit;border-radius:999px;border:1px solid var(--ln);background:va
 header>button{padding:8px 10px}
 .rr{display:flex;gap:10px;align-items:center;width:100%}.rb{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:20px;background:var(--p2);color:var(--tx);border:3px solid var(--gf);flex:none}.rb.r,.n.r{background:#c9525c;color:#fff}.rb.k,.n.k{background:#4a5266;color:#fff}.rb.g,.n.g{background:#3f9170;color:#fff}.rhh{display:flex;gap:4px;flex-wrap:wrap}.rhh i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}.rhh i.r{background:#c9525c}.rhh i.k{background:#4a5266}.rhh i.g{background:#3f9170}.bd{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;width:100%}.od{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;width:100%}.n{position:relative;border-radius:9px;padding:6px 0;font-size:13px;font-weight:700;background:var(--pn);color:var(--tx)}.n.g[data-k='0']{grid-column:1/-1}.n[data-c]::after{content:attr(data-c);position:absolute;top:-6px;right:-3px;background:var(--gf);color:var(--ink);border-radius:999px;font-size:10px;padding:1px 6px;font-weight:800;pointer-events:none}.n.w{outline:3px solid var(--gf)}
 
-/* === LAYAR MENU & LOADING === */
-.scr{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;transition:opacity .25s}
+/* === LAYAR MENU & LOADING DENGAN MURNI CSS AUTO-HIDE === */
+.scr{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 .scr.hid{display:none!important}
+#loadScr{z-index:60;animation:autoHideLoad .3s ease 1.1s forwards}
+@keyframes autoHideLoad{to{opacity:0;visibility:hidden;pointer-events:none}}
+
 .card-box{width:100%;max-width:440px;background:var(--pn);border:1px solid var(--ln);border-radius:28px;padding:24px 18px;box-shadow:0 8px 28px #0003;text-align:center}
 .logo-badge{width:76px;height:76px;border-radius:24px;background:var(--fl);border:3px solid var(--gf);display:grid;place-items:center;font-size:38px;margin:0 auto 12px;box-shadow:0 4px 12px #0002}
 .title-lg{font-size:24px;font-weight:900;color:var(--gd);margin:0 0 4px;letter-spacing:.5px}
 .sub-lg{font-size:13px;color:var(--mu);margin:0 0 18px}
 .pbar-wrap{width:100%;height:12px;background:var(--p2);border-radius:999px;overflow:hidden;margin:14px 0 8px;border:1px solid var(--ln)}
-.pbar{height:100%;width:100%;background:linear-gradient(90deg,var(--fl),var(--gf));border-radius:999px;animation:cssFill .9s ease-out forwards}
-@keyframes cssFill{0%{width:10%}100%{width:100%}}
+.pbar{height:100%;width:100%;background:linear-gradient(90deg,var(--fl),var(--gf));border-radius:999px;animation:cssFill 1s ease-out forwards}
+@keyframes cssFill{0%{width:5%}100%{width:100%}}
 .suit-anim{display:flex;gap:12px;justify-content:center;font-size:24px;margin:10px 0}
 .suit-anim span{animation:bnc .8s infinite alternate}
 .suit-anim span:nth-child(2){animation-delay:.15s;color:var(--rd)}
@@ -106,7 +109,7 @@ header>button{padding:8px 10px}
 </head>
 <body>
 
-<!-- 1. LOADING SCREEN -->
+<!-- 1. LOADING SCREEN (Otomatis hilang setelah 1.1 detik dengan CSS) -->
 <div class="scr" id="loadScr">
   <div class="card-box">
     <div class="logo-badge">♠</div>
@@ -114,13 +117,12 @@ header>button{padding:8px 10px}
     <p class="sub-lg">Menyiapkan meja & mengocok kartu…</p>
     <div class="suit-anim"><span>♠</span><span>♥</span><span>♦</span><span>♣</span></div>
     <div class="pbar-wrap"><div class="pbar" id="lbar"></div></div>
-    <small id="ltxt" style="color:var(--mu);font-weight:700;display:block;margin-bottom:12px">Siap dimainkan (100%)</small>
-    <button class="big" style="padding:10px 24px;font-size:14px;margin:4px auto 0" onclick="window.enterStart()">▶ Masuk Sekarang</button>
+    <small id="ltxt" style="color:var(--mu);font-weight:700;display:block">Memuat permainan…</small>
   </div>
 </div>
 
-<!-- 2. START MENU (LAYAR PEMBUKA) -->
-<div class="scr hid" id="startScr">
+<!-- 2. START MENU (Tampil langsung begitu Loading selesai) -->
+<div class="scr" id="startScr">
   <div class="card-box">
     <div class="logo-badge">🎰</div>
     <h1 class="title-lg">♠ CASINO OFFLINE</h1>
@@ -134,10 +136,10 @@ header>button{padding:8px 10px}
       </div>
       <small style="color:var(--cd);font-weight:700">Koh Aming, Bang Joko, Pak Haji & Mbak Rina siap menyambutmu!</small>
     </div>
-    <button class="big" style="width:100%;margin:6px 0" onclick="window.startGameNow()">▶ MULAI BERMAIN</button>
+    <button type="button" class="big" style="width:100%;margin:6px 0" id="btnStartPlay">▶ MULAI BERMAIN</button>
     <div class="acts" style="margin-top:8px">
-      <button class="bl" onclick="window.openLobbyNow()">📋 Pilih Meja</button>
-      <button onclick="window.openSettings()">⚙️ Pengaturan</button>
+      <button type="button" class="bl" id="btnStartLobby">📋 Pilih Meja</button>
+      <button type="button" id="btnStartSet">⚙️ Pengaturan</button>
     </div>
   </div>
 </div>
@@ -154,8 +156,8 @@ header>button{padding:8px 10px}
         </div>
       </div>
       <div style="display:flex;gap:6px">
-        <button onclick="window.openSettings()" aria-label="Pengaturan">⚙️</button>
-        <button onclick="window.enterStart()" aria-label="Layar Awal">🏠</button>
+        <button type="button" id="btnMenuSet" aria-label="Pengaturan">⚙️</button>
+        <button type="button" id="btnMenuHome" aria-label="Layar Awal">🏠</button>
       </div>
     </div>
 
@@ -165,7 +167,7 @@ header>button{padding:8px 10px}
       <div class="st-card"><small>Total Ronde</small><b id="mmRounds">0</b></div>
     </div>
 
-    <button class="big" style="width:100%;margin:0 0 12px" onclick="window.startGameNow()">▶ LANJUTKAN PERMAINAN</button>
+    <button type="button" class="big" style="width:100%;margin:0 0 12px" id="btnResume">▶ LANJUTKAN PERMAINAN</button>
 
     <div class="mm-grid" id="mmList"></div>
   </div>
@@ -176,7 +178,7 @@ header>button{padding:8px 10px}
   <div class="mdl">
     <div class="mdl-hd">
       <b>⚙️ Pengaturan</b>
-      <button onclick="window.closeSettings()" style="padding:4px 10px">✕</button>
+      <button type="button" id="btnCloseSet" style="padding:4px 10px">✕</button>
     </div>
     <div class="set-row">
       <div><b>Tema Tampilan</b><small>Sesuaikan warna meja & kartu</small></div>
@@ -188,15 +190,15 @@ header>button{padding:8px 10px}
     </div>
     <div class="set-row">
       <div><b>Efek Suara (SFX)</b><small>Suara chip, kartu & putaran</small></div>
-      <button class="tgl" id="setSfx">ON</button>
+      <button type="button" class="tgl" id="setSfx">ON</button>
     </div>
     <div class="set-row">
       <div><b>Getaran (Haptic)</b><small>Getar saat menang permainan</small></div>
-      <button class="tgl" id="setVib">ON</button>
+      <button type="button" class="tgl" id="setVib">ON</button>
     </div>
     <div class="set-row">
       <div><b>Komentar Bandar</b><small>Tampilkan balon celotehan</small></div>
-      <button class="tgl" id="setChat">ON</button>
+      <button type="button" class="tgl" id="setChat">ON</button>
     </div>
     <div class="set-row">
       <div><b>Kecepatan Animasi</b><small>Durasi putaran slot & roulette</small></div>
@@ -207,13 +209,13 @@ header>button{padding:8px 10px}
     </div>
     <div class="set-row">
       <div><b>Reset Saldo & Data</b><small>Kembalikan saldo ke 1.000</small></div>
-      <button class="bad" id="setReset">Reset ↺</button>
+      <button type="button" class="bad" id="setReset">Reset ↺</button>
     </div>
     <div class="set-row">
-      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.0</small></div>
-      <button class="bl" id="btnCheckUpd">Cek Update</button>
+      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.2</small></div>
+      <button type="button" class="bl" id="btnCheckUpd">Cek Update</button>
     </div>
-    <button class="big" style="width:100%;margin:14px 0 0;padding:11px" onclick="window.closeSettings()">Simpan & Tutup</button>
+    <button type="button" class="big" style="width:100%;margin:14px 0 0;padding:11px" id="btnSaveSet">Simpan & Tutup</button>
   </div>
 </div>
 
@@ -226,19 +228,19 @@ header>button{padding:8px 10px}
     <div style="background:var(--p2);border-radius:16px;padding:12px;margin:12px 0;text-align:left;font-size:13px;white-space:pre-line;color:var(--tx);border:1px solid var(--ln)" id="updLog"></div>
     <div class="pbar-wrap" id="updBarWrap" style="display:none"><div class="pbar" id="updBar"></div></div>
     <small id="updStatus" style="display:block;color:var(--ok);font-weight:700;margin-bottom:8px"></small>
-    <button class="big" style="width:100%;margin:6px 0;padding:12px" id="btnDoUpd">⚡ UPDATE SEKARANG</button>
-    <button id="btnSkipUpd" style="width:100%;margin-top:6px;display:none">Nanti Saja</button>
+    <button type="button" class="big" style="width:100%;margin:6px 0;padding:12px" id="btnDoUpd">⚡ UPDATE SEKARANG</button>
+    <button type="button" id="btnSkipUpd" style="width:100%;margin-top:6px;display:none">Nanti Saja</button>
   </div>
 </div>
 
 <!-- 6. GAME INTERFACE UTAMA -->
 <div class="wrap">
   <header>
-    <b class="lg" onclick="window.openLobbyNow()" title="Kembali ke Main Menu">☰ MENU</b>
+    <b class="lg" id="btnToMenu" title="Kembali ke Main Menu">☰ MENU</b>
     <div class="bal"><i id="dl"></i><span id="bal">1.000</span></div>
-    <div class="step"><button id="bm" aria-label="Kurangi taruhan">−</button><span id="bet">10</span><button id="bp" aria-label="Tambah taruhan">+</button></div>
-    <button id="rs" aria-label="Reset uang" title="Reset uang">↺</button>
-    <button onclick="window.openSettings()" aria-label="Pengaturan" title="Pengaturan">⚙️</button>
+    <div class="step"><button type="button" id="bm" aria-label="Kurangi taruhan">−</button><span id="bet">10</span><button type="button" id="bp" aria-label="Tambah taruhan">+</button></div>
+    <button type="button" id="rs" aria-label="Reset uang" title="Reset uang">↺</button>
+    <button type="button" id="th" aria-label="Pengaturan" title="Pengaturan">⚙️</button>
   </header>
   <main id="g"></main>
 </div>
@@ -252,29 +254,34 @@ header>button{padding:8px 10px}
 
 <script>
 /* ==========================================================
-   SAFE STORAGE WRAPPER (ANTI CRASH DI WEBVIEW ANDROID)
+   SAFE STORAGE WRAPPER & PEMBERSIH CACHE OTA LAMA
    ========================================================== */
-const memStore = {};
-const DB = {
-  get(k) {
+var memStore = {};
+var DB = {
+  get: function(k) {
     try { return window.localStorage ? localStorage.getItem(k) : (memStore[k] || null); }
     catch (e) { return memStore[k] || null; }
   },
-  set(k, v) {
+  set: function(k, v) {
     memStore[k] = String(v);
     try { if (window.localStorage) localStorage.setItem(k, String(v)); } catch (e) {}
+  },
+  del: function(k) {
+    delete memStore[k];
+    try { if (window.localStorage) localStorage.removeItem(k); } catch (e) {}
   }
 };
 
-/* ==========================================================
-   KONFIGURASI VERSI & AUTO-UPDATE GITHUB
-   ========================================================== */
-const APP_VERSION = "1.0.0";
-const UPDATE_JSON_URL = "https://raw.githubusercontent.com/rafaauliaardana/casino-update/main/version.json";
+// Bersihkan cache OTA v1 lama yang menyebabkan layar macet
+DB.del("cw_ota_ver");
+DB.del("cw_ota_html");
+
+var APP_VERSION = "1.0.2";
+var UPDATE_JSON_URL = "https://raw.githubusercontent.com/rafaauliaardana/casino-update/main/version.json";
 
 function compareVer(v1, v2) {
-  const a = String(v1).split(".").map(Number), b = String(v2).split(".").map(Number);
-  for (let i = 0; i < Math.max(a.length, b.length); i++) {
+  var a = String(v1).split(".").map(Number), b = String(v2).split(".").map(Number);
+  for (var i = 0; i < Math.max(a.length, b.length); i++) {
     if ((a[i] || 0) > (b[i] || 0)) return 1;
     if ((a[i] || 0) < (b[i] || 0)) return -1;
   }
@@ -283,8 +290,8 @@ function compareVer(v1, v2) {
 
 (function applySavedOTA(){
   try {
-    const otaVer = DB.get("cw_ota_ver");
-    const otaHtml = DB.get("cw_ota_html");
+    var otaVer = DB.get("cw_ota_v2_ver");
+    var otaHtml = DB.get("cw_ota_v2_html");
     if (otaVer && otaHtml && compareVer(otaVer, APP_VERSION) > 0 && !window.__OTA_LOADED__) {
       window.__OTA_LOADED__ = true;
       document.open();
@@ -297,22 +304,24 @@ function compareVer(v1, v2) {
 /* ==========================================================
    DATA DIALOG & LOGIKA UTAMA PERMAINAN
    ========================================================== */
-const L={"move_fold":["Fold lagi? Nanti blind-mu habis lho.","Fold. Lari dari medan perang, ya?","Oke, satu orang kabur.","Menyerah? Sayang chip-nya."],"move_check":["Check. Main aman, hmm.","Check? Mencurigakan.","Diam-diam menghanyutkan, ya."],"move_call":["Ikut? Berani juga.","Call. Oke, kita lihat.","Kamu ikut, aku senang."],"move_raise":["Taruhan naik jadi {taruhan}. Panas nih.","Hmm, itu bluff atau beneran?","Naikin taruhan? Siapa takut.","Raise! Ada yang mulai berani."],"move_allin":["All-in. Berdoa dulu sana.","Dorong semua! Mari kita lihat nyalimu.","ALL-IN?! Gila kamu.","Semua chip? Aku suka orang nekat."],"fold_win":["Kami menyerah. Nikmati potnya, tapi jangan besar kepala.","Ya ya, ambil aja potnya. Kami cuma takut, bukan kalah.","Fold semua, kamu menang. Strategi? Atau keberuntungan?","Semua fold, kamu ambil pot. Cerdik atau beruntung?","Menang karena semua menyerah. Strategi atau keberuntungan?"],"blunder_fold":["Fold dengan tangan bagus. Itu namanya membuang rezeki.","Kartunya sebenarnya kuat. Sayang kamu tidak sadar.","Wkwk, nyerah terlalu cepat.","Kartumu tadi bagus lho. Sayang kamu fold.","Kartu bagus dibuang. Aku untung, kamu menyesal."],"blunder_call":["Yakin mau call? Kamu hampir pasti kalah.","Kartu receh tapi berani call besar. Bagus, uangmu kuambil.","Call {taruhan} dengan kartu begitu? Sedekah ya?","Kartu kecil, call besar. Sedekah kilat namanya.","Call nekat. Aku suka semangatnya, bukan keputusannya."],"blunder_allin":["All-in tanpa perhitungan. Aku suka gaya bunuh dirinya.","Dewa bluff atau cuma panik? Aku pilih yang kedua.","Dorong semua dengan kartu receh. Nekat!","All-in sembarangan. Keberanian tanpa otak.","All-in dengan kartu begitu? Nekat atau putus asa?"],"allin_bot":["Dorong semua. Ayo, call kalau berani.","Semua chip di tengah. Call atau menyerah?","Semua masuk. Kamu berani atau takut?","Semua chipku masuk: {taruhan}. Kamu berani call?","All-in! Berani nggak kamu call?"],"bust_out":["Gugur! Rumah selalu menang, ingat itu.","Habis. GG, semoga lain kali lebih beruntung.","Stack habis. GG, belajar dulu sana.","Gugur. Dompetmu butuh istirahat.","Habis deh chip-mu. Mau beli lagi?"],"greet":["Silakan duduk. Kopi gratis, kerugian bayar sendiri.","Silakan main. Rumah selalu senang kedatangan tamu.","Duduk, duduk. Dompetnya jangan ketinggalan ya.","Halo! Kursi sudah hangat, chip sudah siap. Tinggal kamu.","Selamat datang di rumah yang selalu menang. Eh, maksudku selalu ramah.","Selamat datang! Siap kehilangan uang dengan gaya?"],"win":["Hoki kamu lagi bagus. Sayangnya cuma sementara.","Beginner’s luck itu namanya.","Cih. Sekali ini aja ya!","Menang sekali jangan langsung besar kepala.","Kamu menang {taruhan} dari aku. Nikmati dulu, nanti balik.","Nikmati kemenanganmu sebelum aku tarik balik."],"bigwin":["Menang {taruhan}?! WADUH! Curang ya?","Jangan pulang dulu, kasih aku kesempatan balas dendam!","Jangan-jangan kamu bawa jimat ya?","Kemenangan epik! Tapi jangan kebiasaan ya.","Traktir makan dong, uangnya dari aku kan.","Wah wah wah. Rumah bisa bangkrut kalau begini terus."],"lose":["Tenang, kekalahan itu sementara. Uangmu yang hilang itu permanen.","Kalah lagi? Dompetmu tabah sekali ya.","Yah kalah. Kasihan deh.","Yah, chip-nya melayang. Coba lagi besok ya.","Makasih sudah berkontribusi untuk rumah.","Makasih donasi {taruhan}-nya. Sisa duitmu {duit}, jangan pulang dulu."],"streak":["Mungkin coba doa dulu sebelum main?","Mau istirahat dulu? Eh jangan, lanjut aja!","Streak kalah {streak}x. Duitmu sisa {duit}, ayo bangkit!","Kalah terus tapi tetap semangat. Itu namanya pantang menyerah atau keras kepala?","Kalah beruntun nih. Ganti taktik atau ganti hobi?","Kalah beruntun. Ada diskon khusus untuk tamu setia, lho."],"blunder":["Kamu yakin tadi lihat kartunya?","Aduh, ngawur banget. Aku sampai kasihan.","Itu langkah paling nekat yang pernah kulihat.","Kalau itu strategi, strateginya bikin aku untung.","Keputusanmu bikin dealer tersenyum lebar.","Serius itu keputusanmu? Otakmu ditaruh di mana tadi?"],"lucky_blunder":["Salah langkah tapi hasilnya benar. Hoki atau ilmu hitam?","Tadi itu salah, tapi menang. Dunia memang tidak adil.","Langkah blunder, hasil jackpot. Dunia memang aneh.","Ngawur tapi menang {taruhan}. Dunia memang tidak adil.","Langkah ngawur tapi menang. Kamu dewa judi atau cuma beruntung?","Ngawur tapi menang. Aku mulai percaya takhayul."],"push":["Imbang. Seperti hidup tanpa kejutan.","Seri. Aku harap ini bukan pertanda.","Imbang. Nggak ada yang untung, aku bete.","Push. Coba lagi, semoga lebih seru.","Imbang. Setengah senang, setengah bosan.","Seri. Membosankan."],"bust":["Kelebihan, kasihan. Kartunya kebanyakan nafsu.","Kelebihan kartu. Kamu kalah oleh keserakahan sendiri.","Kartu kebanyakan. Serakah itu mahal harganya.","Bust! Nafsu besar, hasil nol.","21 itu batas, bukan saran.","Bust. Itu namanya mendorong terlalu jauh."],"dealer_bust":["Kartuku terlalu banyak. Ambil chipmu, tapi jangan terbiasa.","Dealer bust. Keberuntungan sedang berpihak padamu.","Bandar kelebihan... ya sudahlah, ambil sana.","Aku bust. Kamu menang {taruhan}. Nikmati.","Kartuku mengkhianatiku!","Aku bust. Nikmati saja kemenanganmu."],"blackjack":["Blackjack. Kamu beruntung, atau aku yang sial?","Blackjack. Selamat, tapi jangan sombong.","Blackjack! Rumah harus bayar lebih. Menyebalkan.","Blackjack?! Kartu apa itu, kartu ajaib?","Blackjack! Kamu dapat {taruhan}. Bayarannya sakit hati nih.","Blackjack. Keberuntunganmu membuatku iri."],"move_spin":["Taruhan {taruhan} masuk. Aku suka keberanianmu.","Putar! Semoga hokimu belum habis.","Mesinnya sudah panas. Tarik!","Ayo ayo, jangan malu-malu.","Putar terus, aku nggak keberatan."],"move_deal":["Kartu dibagikan. Semoga dewi fortuna ada di pihakmu.","Taruhan {taruhan}. Bagus, bagus.","Mari lihat kartu apa yang bikin kamu menyesal.","Siap-siap, kartunya panas nih."],"move_hold":["Kamu yakin menahan kartu itu?","HOLD ya. Hmm.","Itu yang kamu pilih? Berani juga."],"move_draw":["Kartu baru datang, nasib lama masih sama.","Ganti kartu, ganti nasib.","Tukar kartu. Semoga beruntung."],"move_hit":["Hit! Berani amat.","Satu kartu lagi. Awas kelewatan.","Oke, kartu datang.","Rakus itu bagus, sampai bust."],"move_stand":["Stand. Main aman ya?","Oke, giliranku.","Berhenti di situ? Kita lihat nanti."],"move_double":["Gandakan taruhan jadi {taruhan}? Aku suka gayamu.","Double down. Semoga tidak menyesal.","Double! Nekat atau yakin?"],"move_chip":["Chip masuk. Dompetmu mulai gemetar.","Wah, pilihan berani.","Oke, kucatat taruhanmu.","Taruh lagi dong, jangan nanggung."],"move_clear":["Batal? Penakut.","Menarik taruhan? Bijak atau pengecut ya.","Chip ditarik. Aku kecewa."]};
+var L={"move_fold":["Fold lagi? Nanti blind-mu habis lho.","Fold. Lari dari medan perang, ya?","Oke, satu orang kabur.","Menyerah? Sayang chip-nya."],"move_check":["Check. Main aman, hmm.","Check? Mencurigakan.","Diam-diam menghanyutkan, ya."],"move_call":["Ikut? Berani juga.","Call. Oke, kita lihat.","Kamu ikut, aku senang."],"move_raise":["Taruhan naik jadi {taruhan}. Panas nih.","Hmm, itu bluff atau beneran?","Naikin taruhan? Siapa takut.","Raise! Ada yang mulai berani."],"move_allin":["All-in. Berdoa dulu sana.","Dorong semua! Mari kita lihat nyalimu.","ALL-IN?! Gila kamu.","Semua chip? Aku suka orang nekat."],"fold_win":["Kami menyerah. Nikmati potnya, tapi jangan besar kepala.","Ya ya, ambil aja potnya. Kami cuma takut, bukan kalah.","Fold semua, kamu menang. Strategi? Atau keberuntungan?","Semua fold, kamu ambil pot. Cerdik atau beruntung?","Menang karena semua menyerah. Strategi atau keberuntungan?"],"blunder_fold":["Fold dengan tangan bagus. Itu namanya membuang rezeki.","Kartunya sebenarnya kuat. Sayang kamu tidak sadar.","Wkwk, nyerah terlalu cepat.","Kartumu tadi bagus lho. Sayang kamu fold.","Kartu bagus dibuang. Aku untung, kamu menyesal."],"blunder_call":["Yakin mau call? Kamu hampir pasti kalah.","Kartu receh tapi berani call besar. Bagus, uangmu kuambil.","Call {taruhan} dengan kartu begitu? Sedekah ya?","Kartu kecil, call besar. Sedekah kilat namanya.","Call nekat. Aku suka semangatnya, bukan keputusannya."],"blunder_allin":["All-in tanpa perhitungan. Aku suka gaya bunuh dirinya.","Dewa bluff atau cuma panik? Aku pilih yang kedua.","Dorong semua dengan kartu receh. Nekat!","All-in sembarangan. Keberanian tanpa otak.","All-in dengan kartu begitu? Nekat atau putus asa?"],"allin_bot":["Dorong semua. Ayo, call kalau berani.","Semua chip di tengah. Call atau menyerah?","Semua masuk. Kamu berani atau takut?","Semua chipku masuk: {taruhan}. Kamu berani call?","All-in! Berani nggak kamu call?"],"bust_out":["Gugur! Rumah selalu menang, ingat itu.","Habis. GG, semoga lain kali lebih beruntung.","Stack habis. GG, belajar dulu sana.","Gugur. Dompetmu butuh istirahat.","Habis deh chip-mu. Mau beli lagi?"],"greet":["Silakan duduk. Kopi gratis, kerugian bayar sendiri.","Silakan main. Rumah selalu senang kedatangan tamu.","Duduk, duduk. Dompetnya jangan ketinggalan ya.","Halo! Kursi sudah hangat, chip sudah siap. Tinggal kamu.","Selamat datang di rumah yang selalu menang. Eh, maksudku selalu ramah.","Selamat datang! Siap kehilangan uang dengan gaya?"],"win":["Hoki kamu lagi bagus. Sayangnya cuma sementara.","Beginner’s luck itu namanya.","Cih. Sekali ini aja ya!","Menang sekali jangan langsung besar kepala.","Kamu menang {taruhan} dari aku. Nikmati dulu, nanti balik.","Nikmati kemenanganmu sebelum aku tarik balik."],"bigwin":["Menang {taruhan}?! WADUH! Curang ya?","Jangan pulang dulu, kasih aku kesempatan balas dendam!","Jangan-jangan kamu bawa jimat ya?","Kemenangan epik! Tapi jangan kebiasaan ya.","Traktir makan dong, uangnya dari aku kan.","Wah wah wah. Rumah bisa bangkrut kalau begini terus."],"lose":["Tenang, kekalahan itu sementara. Uangmu yang hilang itu permanen.","Kalah lagi? Dompetmu tabah sekali ya.","Yah kalah. Kasihan deh.","Yah, chip-nya melayang. Coba lagi besok ya.","Makasih sudah berkontribusi untuk rumah.","Makasih donasi {taruhan}-nya. Sisa duitmu {duit}, jangan pulang dulu."],"streak":["Mungkin coba doa dulu sebelum main?","Mau istirahat dulu? Eh jangan, lanjut aja!","Streak kalah {streak}x. Duitmu sisa {duit}, ayo bangkit!","Kalah terus tapi tetap semangat. Itu namanya pantang menyerah atau keras kepala?","Kalah beruntun nih. Ganti taktik atau ganti hobi?","Kalah beruntun. Ada diskon khusus untuk tamu setia, lho."],"blunder":["Kamu yakin tadi lihat kartunya?","Aduh, ngawur banget. Aku sampai kasihan.","Itu langkah paling nekat yang pernah kulihat.","Kalau itu strategi, strateginya bikin aku untung.","Keputusanmu bikin dealer tersenyum lebar.","Serius itu keputusanmu? Otakmu ditaruh di mana tadi?"],"lucky_blunder":["Salah langkah tapi hasilnya benar. Hoki atau ilmu hitam?","Tadi itu salah, tapi menang. Dunia memang tidak adil.","Langkah blunder, hasil jackpot. Dunia memang aneh.","Ngawur tapi menang {taruhan}. Dunia memang tidak adil.","Langkah ngawur tapi menang. Kamu dewa judi atau cuma beruntung?","Ngawur tapi menang. Aku mulai percaya takhayul."],"push":["Imbang. Seperti hidup tanpa kejutan.","Seri. Aku harap ini bukan pertanda.","Imbang. Nggak ada yang untung, aku bete.","Push. Coba lagi, semoga lebih seru.","Imbang. Setengah senang, setengah bosan.","Seri. Membosankan."],"bust":["Kelebihan, kasihan. Kartunya kebanyakan nafsu.","Kelebihan kartu. Kamu kalah oleh keserakahan sendiri.","Kartu kebanyakan. Serakah itu mahal harganya.","Bust! Nafsu besar, hasil nol.","21 itu batas, bukan saran.","Bust. Itu namanya mendorong terlalu jauh."],"dealer_bust":["Kartuku terlalu banyak. Ambil chipmu, tapi jangan terbiasa.","Dealer bust. Keberuntungan sedang berpihak padamu.","Bandar kelebihan... ya sudahlah, ambil sana.","Aku bust. Kamu menang {taruhan}. Nikmati.","Kartuku mengkhianatiku!","Aku bust. Nikmati saja kemenanganmu."],"blackjack":["Blackjack. Kamu beruntung, atau aku yang sial?","Blackjack. Selamat, tapi jangan sombong.","Blackjack! Rumah harus bayar lebih. Menyebalkan.","Blackjack?! Kartu apa itu, kartu ajaib?","Blackjack! Kamu dapat {taruhan}. Bayarannya sakit hati nih.","Blackjack. Keberuntunganmu membuatku iri."],"move_spin":["Taruhan {taruhan} masuk. Aku suka keberanianmu.","Putar! Semoga hokimu belum habis.","Mesinnya sudah panas. Tarik!","Ayo ayo, jangan malu-malu.","Putar terus, aku nggak keberatan."],"move_deal":["Kartu dibagikan. Semoga dewi fortuna ada di pihakmu.","Taruhan {taruhan}. Bagus, bagus.","Mari lihat kartu apa yang bikin kamu menyesal.","Siap-siap, kartunya panas nih."],"move_hold":["Kamu yakin menahan kartu itu?","HOLD ya. Hmm.","Itu yang kamu pilih? Berani juga."],"move_draw":["Kartu baru datang, nasib lama masih sama.","Ganti kartu, ganti nasib.","Tukar kartu. Semoga beruntung."],"move_hit":["Hit! Berani amat.","Satu kartu lagi. Awas kelewatan.","Oke, kartu datang.","Rakus itu bagus, sampai bust."],"move_stand":["Stand. Main aman ya?","Oke, giliranku.","Berhenti di situ? Kita lihat nanti."],"move_double":["Gandakan taruhan jadi {taruhan}? Aku suka gayamu.","Double down. Semoga tidak menyesal.","Double! Nekat atau yakin?"],"move_chip":["Chip masuk. Dompetmu mulai gemetar.","Wah, pilihan berani.","Oke, kucatat taruhanmu.","Taruh lagi dong, jangan nanggung."],"move_clear":["Batal? Penakut.","Menarik taruhan? Bijak atau pengecut ya.","Chip ditarik. Aku kecewa."]};
 
-const $=s=>document.querySelector(s),R=n=>Math.floor(Math.random()*n),pick=a=>a[R(a.length)];
-const $m=n=>{try{return Number(n).toLocaleString("id-ID")}catch(e){return String(n)}};
-const SU="♠♥♦♣",RK="23456789TJQKA";
-const S={bal:1000,peak:1000,rounds:0,bet:10,g:"slots",streak:0,theme:"auto",sfx:1,vib:1,chat:1,spd:1,lock:0};
+var $=function(s){return document.querySelector(s)};
+var R=function(n){return Math.floor(Math.random()*n)};
+var pick=function(a){return a[R(a.length)]};
+var $m=function(n){try{return Number(n).toLocaleString("id-ID")}catch(e){return String(n)}};
+var SU="♠♥♦♣",RK="23456789TJQKA";
+var S={bal:1000,peak:1000,rounds:0,bet:10,g:"slots",streak:0,theme:"auto",sfx:1,vib:1,chat:1,spd:1,lock:0};
 try{Object.assign(S,JSON.parse(DB.get("cw")||"{}"));S.lock=0}catch(e){}
-const save=()=>{try{if(S.bal>S.peak)S.peak=S.bal;DB.set("cw",JSON.stringify({bal:S.bal,peak:S.peak,rounds:S.rounds,g:S.g,theme:S.theme,sfx:S.sfx,vib:S.vib,chat:S.chat,spd:S.spd}))}catch(e){}};
+var save=function(){try{if(S.bal>S.peak)S.peak=S.bal;DB.set("cw",JSON.stringify({bal:S.bal,peak:S.peak,rounds:S.rounds,g:S.g,theme:S.theme,sfx:S.sfx,vib:S.vib,chat:S.chat,spd:S.spd}))}catch(e){}};
 
-let actx=null;
+var actx=null;
 function sfx(type){
   if(!S.sfx)return;
   try{
     if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();
     if(actx.state==="suspended")actx.resume();
-    const o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;
+    var o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;
     o.connect(g);g.connect(actx.destination);
     if(type==="click"){o.frequency.setValueAtTime(520,t);g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.05);o.start(t);o.stop(t+.05)}
     else if(type==="card"){o.type="triangle";o.frequency.setValueAtTime(300,t);o.frequency.exponentialRampToValueAtTime(620,t+.06);g.gain.setValueAtTime(.1,t);g.gain.exponentialRampToValueAtTime(.001,t+.06);o.start(t);o.stop(t+.06)}
@@ -321,33 +330,35 @@ function sfx(type){
   }catch(e){}
 }
 
-const CH={slots:["Koh Aming","#6fc3a5"],bj:["Bang Joko","#f0a868"],vp:["Pak Haji","#b99be0"],hd:["Bang Joko","#f0a868"],ro:["Mbak Rina","#f08fb4"]};
-const sh=a=>{for(let i=a.length-1;i>0;i--){const j=R(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
-const deck=n=>{const d=[];for(let k=0;k<n;k++)for(const r of RK)for(const s of SU)d.push([r,s]);return sh(d)};
-const cd=(c,x="")=>c?`<div class="cd ${"♥♦".includes(c[1])?"r":""} ${x}"><b>${c[0]=="T"?10:c[0]}</b><i>${c[1]}</i></div>`:`<div class="cd bk"></div>`;
+var CH={slots:["Koh Aming","#6fc3a5"],bj:["Bang Joko","#f0a868"],vp:["Pak Haji","#b99be0"],hd:["Bang Joko","#f0a868"],ro:["Mbak Rina","#f08fb4"]};
+var sh=function(a){for(var i=a.length-1;i>0;i--){var j=R(i+1),t=a[i];a[i]=a[j];a[j]=t}return a};
+var deck=function(n){var d=[];for(var k=0;k<n;k++)for(var i=0;i<RK.length;i++)for(var j=0;j<SU.length;j++)d.push([RK[i],SU[j]]);return sh(d)};
+var cd=function(c,x){x=x||"";return c?'<div class="cd '+("♥♦".indexOf(c[1])>=0?"r":"")+' '+x+'"><b>'+(c[0]=="T"?10:c[0])+'</b><i>'+c[1]+'</i></div>':'<div class="cd bk"></div>'};
 
-function theme(t){S.theme=t||S.theme;const r=document.documentElement;S.theme=="auto"?r.removeAttribute("data-theme"):r.dataset.theme=S.theme;save()}
+function theme(t){S.theme=t||S.theme;var r=document.documentElement;S.theme=="auto"?r.removeAttribute("data-theme"):r.dataset.theme=S.theme;save()}
 function toast(mv,t,c){
   if(!S.chat&&t){t=""}
   if(!mv&&!t)return;
-  const e=$('#tt');if(!e)return;
-  e.innerHTML=(c&&t?`<span class='av' style='background:${c[1]}'>${c[0][0]}</span>`:'')+(mv?`<b>${mv}</b>`:'')+(t?`<div>${c?`<em>${c[0]}</em>`:''}<span>“${t}”</span></div>`:'');
-  e.className='on';clearTimeout(toast.h);toast.h=setTimeout(()=>e.className='',Math.min(5500,2400+30*(t||'').length));
+  var e=$('#tt');if(!e)return;
+  e.innerHTML=(c&&t?"<span class='av' style='background:"+c[1]+"'>"+c[0][0]+"</span>":"")+(mv?"<b>"+mv+"</b>":"")+(t?"<div>"+(c?"<em>"+c[0]+"</em>":"")+"<span>“"+t+"”</span></div>":"");
+  e.className='on';clearTimeout(toast.h);toast.h=setTimeout(function(){e.className=''},Math.min(5500,2400+30*(t||'').length));
 }
-function say(ev,mv,x={}){
-  const c=CH[S.g]||CH.slots;x={duit:S.bal,taruhan:S.bet,streak:S.streak,...x};
-  const p=(L[ev]||[]).filter(l=>{
-    const ms=l.match(/\{(\w+)\}/g)||[];
-    return ms.every(m=>m.slice(1,-1) in x);
+function say(ev,mv,x){
+  var c=CH[S.g]||CH.slots;
+  var data=Object.assign({duit:S.bal,taruhan:S.bet,streak:S.streak},x||{});
+  var p=(L[ev]||[]).filter(function(l){
+    var ms=l.match(/\{(\w+)\}/g)||[];
+    return ms.every(function(m){return m.slice(1,-1) in data});
   });
   if(!p.length){toast(mv);return}
-  const t=pick(p).replace(/\{(\w+)\}/g,(_,k)=>$m(x[k]));
-  $("#nm").textContent=c[0];const a=$("#av");a.textContent=c[0][0];a.style.background=c[1];
-  const e=$("#tx");e.style.transition="none";e.style.opacity=0;e.textContent="“"+t+"”";void e.offsetWidth;e.style.transition="opacity .6s";e.style.opacity=1;
+  var t=pick(p).replace(/\{(\w+)\}/g,function(_,k){return $m(data[k])});
+  $("#nm").textContent=c[0];var a=$("#av");a.textContent=c[0][0];a.style.background=c[1];
+  var e=$("#tx");e.style.transition="none";e.style.opacity=0;e.textContent="“"+t+"”";void e.offsetWidth;e.style.transition="opacity .6s";e.style.opacity=1;
   toast(mv,t,c);
 }
-const moved=(mv,ev,p=1,x={})=>Math.random()<p&&ev?say(ev,mv,x):toast(mv);
-function res(won,o={},mv="",x={}){
+var moved=function(mv,ev,p,x){p=p===undefined?1:p;return Math.random()<p&&ev?say(ev,mv,x):toast(mv)};
+function res(won,o,mv,x){
+  o=o||{};mv=mv||"";
   S.rounds++;save();
   if(o.push)return say("push",mv,x);
   if(won){S.streak=0;if(S.vib&&navigator.vibrate)navigator.vibrate(25);sfx("win");say(o.bl?"lucky_blunder":o.big?"bigwin":"win",mv,x)}
@@ -355,7 +366,7 @@ function res(won,o={},mv="",x={}){
 }
 function pay(d){
   S.bal+=d;if(S.bal>S.peak)S.peak=S.bal;
-  if(d){const e=$("#dl");e.textContent=(d>0?"+":"−")+$m(Math.abs(d));e.className=d>0?"up":"dn";e.style.opacity=1;clearTimeout(pay.h);pay.h=setTimeout(()=>e.style.opacity=0,1400)}
+  if(d){var e=$("#dl");e.textContent=(d>0?"+":"−")+$m(Math.abs(d));e.className=d>0?"up":"dn";e.style.opacity=1;clearTimeout(pay.h);pay.h=setTimeout(function(){e.style.opacity=0},1400)}
   draw();save();
 }
 function draw(){
@@ -364,56 +375,57 @@ function draw(){
   if($("#bet"))$("#bet").textContent=$m(S.bet);
   if($("#mmBal")){$("#mmBal").textContent=$m(S.bal);$("#mmPeak").textContent=$m(S.peak);$("#mmRounds").textContent=$m(S.rounds)}
 }
-const can=()=>{if(S.bal>=S.bet)return 1;toast(S.bal<10?"Saldo habis. Tekan ↺ untuk reset":"Saldo kurang");return 0};
-$("#bm").onclick=()=>{if(!S.lock){sfx("click");S.bet=Math.max(10,S.bet-10);draw()}};
-$("#bp").onclick=()=>{if(!S.lock){sfx("click");S.bet=Math.min(Math.max(10,S.bal),S.bet+10);draw()}};
+var can=function(){if(S.bal>=S.bet)return 1;toast(S.bal<10?"Saldo habis. Tekan ↺ untuk reset":"Saldo kurang");return 0};
+$("#bm").onclick=function(){if(!S.lock){sfx("click");S.bet=Math.max(10,S.bet-10);draw()}};
+$("#bp").onclick=function(){if(!S.lock){sfx("click");S.bet=Math.min(Math.max(10,S.bal),S.bet+10);draw()}};
 
-let roulRefund=null;
+var roulRefund=null;
 function safeCleanupTable(){
   if(Z&&H.ph==="between"){
-    const st=Z.ps[0].st;Z=null;H.ph="closed";
+    var st=Z.ps[0].st;Z=null;H.ph="closed";
     if(st>0)pay(st);
   }
   if(typeof roulRefund==="function")roulRefund();
 }
 
-let rc=0;
-$("#rs").onclick=()=>{
+var rc=0;
+$("#rs").onclick=function(){
   if(S.lock)return toast("Selesaikan ronde dulu");
-  const b=$("#rs");
-  if(!rc){rc=1;b.textContent="Yakin?";setTimeout(()=>{rc=0;b.textContent="↺"},3000);return}
+  var b=$("#rs");
+  if(!rc){rc=1;b.textContent="Yakin?";setTimeout(function(){rc=0;b.textContent="↺"},3000);return}
   rc=0;b.textContent="↺";safeCleanupTable();S.bal=1000;S.streak=0;draw();save();
   if(S.g==="hd")hr();
   toast("Saldo direset ke 1.000");
 };
-const G=$("#g");
+var G=$("#g");
 
 /* 1. SLOTS */
 function slots(){
-  const P=["7","★","★","♦","♦","♦","♣","♣","♣","♣","♥","♥","♥","♥","♥"],PY={"7":100,"★":30,"♦":15,"♣":8,"♥":5},CL={"7":"#e8625a","★":"#e0a82e","♦":"#4f8fe0","♣":"#3f9d66","♥":"#e0679b"};
-  G.innerHTML='<div class="felt"><div class="reels">'+[0,1,2].map(i=>`<div class="reel" id="r${i}"></div>`).join("")+'</div></div><p class="msg" id="m">Atur taruhan, lalu putar</p><button class="big" id="go">PUTAR</button><p class="hint">777 x100 · ★★★ x30 · ♦♦♦ x15 · ♣♣♣ x8 · ♥♥♥ x5 · dua sama x0,5</p>';
-  const set=(i,s)=>{const e=$("#r"+i);if(e){e.innerHTML="<span>"+s+"</span>";e.style.color=CL[s]}};
-  const roll=(f,cb)=>{
-    let done=0;
-    [0,1,2].forEach(i=>{
-      const e=$("#r"+i),H=e.getBoundingClientRect().height||120,N=22,sy=[f[i],...Array.from({length:N-1},()=>pick(P))];
-      e.innerHTML="<div class='rs'>"+sy.map(s=>`<span style='height:${H}px;color:${CL[s]}'>${s}</span>`).join("")+"</div>";
-      const st=e.firstChild,d=(1500+i*600)*S.spd,t0=performance.now();
+  var P=["7","★","★","♦","♦","♦","♣","♣","♣","♣","♥","♥","♥","♥","♥"],PY={"7":100,"★":30,"♦":15,"♣":8,"♥":5},CL={"7":"#e8625a","★":"#e0a82e","♦":"#4f8fe0","♣":"#3f9d66","♥":"#e0679b"};
+  G.innerHTML='<div class="felt"><div class="reels">'+[0,1,2].map(function(i){return '<div class="reel" id="r'+i+'"></div>'}).join("")+'</div></div><p class="msg" id="m">Atur taruhan, lalu putar</p><button type="button" class="big" id="go">PUTAR</button><p class="hint">777 x100 · ★★★ x30 · ♦♦♦ x15 · ♣♣♣ x8 · ♥♥♥ x5 · dua sama x0,5</p>';
+  var set=function(i,s){var e=$("#r"+i);if(e){e.innerHTML="<span>"+s+"</span>";e.style.color=CL[s]}};
+  var roll=function(f,cb){
+    var done=0;
+    [0,1,2].forEach(function(i){
+      var e=$("#r"+i),H=e.getBoundingClientRect().height||120,N=22,sy=[f[i]];
+      for(var k=0;k<N-1;k++)sy.push(pick(P));
+      e.innerHTML="<div class='rs'>"+sy.map(function(s){return "<span style='height:"+H+"px;color:"+CL[s]+"'>"+s+"</span>"}).join("")+"</div>";
+      var st=e.firstChild,d=(1500+i*600)*S.spd,t0=performance.now();
       (function fr(now){
-        const p=Math.min(1,(now-t0)/d),ez=1-Math.pow(1-p,3);
-        st.style.transform=`translateY(${-(N-1)*H*(1-ez)}px)`;
+        var p=Math.min(1,(now-t0)/d),ez=1-Math.pow(1-p,3);
+        st.style.transform="translateY("+(-(N-1)*H*(1-ez))+"px)";
         if(p<1)requestAnimationFrame(fr);else{set(i,f[i]);sfx("card");if(++done==3)cb()}
       })(t0);
     });
   };
-  ["7","★","♦"].forEach((s,i)=>set(i,s));
-  $("#go").onclick=()=>{
+  ["7","★","♦"].forEach(function(s,i){set(i,s)});
+  $("#go").onclick=function(){
     if(S.lock||!can())return;
     sfx("click");
-    const b=S.bet,risky=b*2>=S.bal,f=[0,1,2].map(()=>pick(P));
+    var b=S.bet,risky=b*2>=S.bal,f=[pick(P),pick(P),pick(P)];
     S.lock=1;pay(-b);moved("PUTAR "+$m(b),"move_spin",.6,{taruhan:b});
-    roll(f,()=>{
-      const[a,c,d]=f,m=a==c&&c==d?PY[a]:(a==c||c==d||a==d)?.5:0,w=Math.floor(b*m);
+    roll(f,function(){
+      var a=f[0],c=f[1],d=f[2],m=a==c&&c==d?PY[a]:(a==c||c==d||a==d)?.5:0,w=Math.floor(b*m);
       S.lock=0;pay(w);
       $("#m").textContent=w?"MENANG "+$m(w)+"!":"Kalah. Coba lagi.";
       res(w>b,{big:m>=15,bl:risky,push:w==b},"",{taruhan:w||b});
@@ -423,23 +435,23 @@ function slots(){
 
 /* 2. BLACKJACK */
 function bj(){
-  let dk=[],pl=[],dl=[],bet=0,hide=1,bad=0;
-  const v=h=>{let t=0,a=0;for(const[r]of h){if(r=="A"){a++;t+=11}else t+="TJQK".includes(r)?10:+r}while(t>21&&a){t-=10;a--}return t};
-  const soft=h=>h.some(c=>c[0]=="A")&&h.reduce((t,[r])=>t+(r=="A"?1:"TJQK".includes(r)?10:+r),0)+10<=21;
-  G.innerHTML='<div class="felt"><div class="lab" id="dv"></div><div class="row" id="dr"></div><div class="lab" id="pv"></div><div class="row" id="pr"></div></div><p class="msg" id="m">Atur taruhan, lalu DEAL</p><div class="acts"><button class="bl" id="d">DEAL</button><button id="h">Hit</button><button id="s">Stand</button><button id="x">Double</button></div>';
-  const on=()=>pl.length&&hide;
+  var dk=[],pl=[],dl=[],bet=0,hide=1,bad=0;
+  var v=function(h){var t=0,a=0;for(var i=0;i<h.length;i++){var r=h[i][0];if(r=="A"){a++;t+=11}else t+="TJQK".indexOf(r)>=0?10:+r}while(t>21&&a){t-=10;a--}return t};
+  var soft=function(h){return h.some(function(c){return c[0]=="A"})&&h.reduce(function(t,c){var r=c[0];return t+(r=="A"?1:"TJQK".indexOf(r)>=0?10:+r)},0)+10<=21};
+  G.innerHTML='<div class="felt"><div class="lab" id="dv"></div><div class="row" id="dr"></div><div class="lab" id="pv"></div><div class="row" id="pr"></div></div><p class="msg" id="m">Atur taruhan, lalu DEAL</p><div class="acts"><button type="button" class="bl" id="d">DEAL</button><button type="button" id="h">Hit</button><button type="button" id="s">Stand</button><button type="button" id="x">Double</button></div>';
+  var on=function(){return pl.length&&hide};
   function rd(){
     $("#dv").textContent="BANDAR "+(on()?"?":dl.length?v(dl):"");
     $("#pv").textContent="KAMU "+(pl.length?v(pl):"");
-    $("#dr").innerHTML=dl.map((c,i)=>cd(on()&&i?0:c)).join("");
-    $("#pr").innerHTML=pl.map(c=>cd(c)).join("");
-    $("#d").disabled=!!on();["h","s"].forEach(k=>$("#"+k).disabled=!on());
+    $("#dr").innerHTML=dl.map(function(c,i){return cd(on()&&i?0:c)}).join("");
+    $("#pr").innerHTML=pl.map(function(c){return cd(c)}).join("");
+    $("#d").disabled=!!on();["h","s"].forEach(function(k){$("#"+k).disabled=!on()});
     $("#x").disabled=!(on()&&pl.length==2&&S.bal>=bet);
   }
   function fin(k,m,mv){
-    const w=Math.floor(bet*m);pay(w);hide=0;S.lock=0;S.rounds++;save();
+    var w=Math.floor(bet*m);pay(w);hide=0;S.lock=0;S.rounds++;save();
     $("#m").textContent={bj:"BLACKJACK! Bayaran 3:2",db:"Bandar bust! Kamu menang",w:"Kamu menang!",p:"Seri",b:"Bust! Kamu kalah",l:"Bandar menang"}[k];
-    const txObj={taruhan:w||bet};
+    var txObj={taruhan:w||bet};
     if(k=="bj"){S.streak=0;sfx("win");say("blackjack",mv,txObj)}
     else if(k=="db"){S.streak=0;sfx("win");say("dealer_bust",mv,txObj)}
     else if(k=="p")say("push",mv,txObj);
@@ -447,22 +459,22 @@ function bj(){
     else{S.rounds--;res(k=="w",{bl:bad},mv,txObj)}
     rd();
   }
-  function dp(mv){hide=0;while(v(dl)<17)dl.push(dk.pop());const p=v(pl),d=v(dl);d>21?fin("db",2,mv):p>d?fin("w",2,mv):p<d?fin("l",0,mv):fin("p",1,mv)}
-  $("#d").onclick=()=>{
+  function dp(mv){hide=0;while(v(dl)<17)dl.push(dk.pop());var p=v(pl),d=v(dl);d>21?fin("db",2,mv):p>d?fin("w",2,mv):p<d?fin("l",0,mv):fin("p",1,mv)}
+  $("#d").onclick=function(){
     if(S.lock||!can())return;sfx("card");
     bet=S.bet;bad=bet*2>=S.bal;pay(-bet);S.lock=1;dk=deck(4);pl=[dk.pop(),dk.pop()];dl=[dk.pop(),dk.pop()];hide=1;
     $("#m").textContent="Hit, Stand, atau Double?";
     if(v(pl)==21){hide=0;v(dl)==21?fin("p",1,"DEAL"):fin("bj",2.5,"DEAL")}
     else{rd();moved("DEAL "+$m(bet),"move_deal",.7,{taruhan:bet})}
   };
-  $("#h").onclick=()=>{
+  $("#h").onclick=function(){
     if(!on())return;sfx("card");
-    const h=v(pl);if(h>=19||(h>=17&&!soft(pl)))bad=1;
-    pl.push(dk.pop());const t=v(pl);
+    var h=v(pl);if(h>=19||(h>=17&&!soft(pl)))bad=1;
+    pl.push(dk.pop());var t=v(pl);
     t>21?fin("b",0,"HIT"):t==21?(bad=bad||0,dp("HIT")):(rd(),moved("HIT","move_hit",.7));
   };
-  $("#s").onclick=()=>{if(!on())return;sfx("click");if(v(pl)<=11)bad=1;dp("STAND")};
-  $("#x").onclick=()=>{
+  $("#s").onclick=function(){if(!on())return;sfx("click");if(v(pl)<=11)bad=1;dp("STAND")};
+  $("#x").onclick=function(){
     if(!on()||pl.length!=2||S.bal<bet)return;sfx("card");
     if(v(pl)>=17&&!soft(pl))bad=1;pay(-bet);bet*=2;pl.push(dk.pop());
     moved("DOUBLE "+$m(bet),"move_double",.5,{taruhan:bet});
@@ -473,33 +485,37 @@ function bj(){
 
 /* 3. VIDEO POKER */
 function vp(){
-  const PT={"Royal Flush":250,"Straight Flush":50,"Four of a Kind":25,"Full House":9,"Flush":6,"Straight":4,"Three of a Kind":3,"Two Pair":2,"Jacks or Better":1},BG=["Royal Flush","Straight Flush","Full House","Flush","Straight"];
-  const rank=h=>{
-    const v=h.map(c=>RK.indexOf(c[0])+2).sort((a,b)=>a-b),fl=new Set(h.map(c=>c[1])).size==1,st=v.every((x,i)=>!i||x==v[i-1]+1)||v.join()=="2,3,4,5,14",cn={};
-    v.forEach(x=>cn[x]=(cn[x]||0)+1);const k=Object.values(cn).sort((a,b)=>b-a);
+  var PT={"Royal Flush":250,"Straight Flush":50,"Four of a Kind":25,"Full House":9,"Flush":6,"Straight":4,"Three of a Kind":3,"Two Pair":2,"Jacks or Better":1},BG=["Royal Flush","Straight Flush","Full House","Flush","Straight"];
+  var rank=function(h){
+    var v=h.map(function(c){return RK.indexOf(c[0])+2}).sort(function(a,b){return a-b});
+    var fl=h.every(function(c){return c[1]==h[0][1]});
+    var st=v.every(function(x,i){return !i||x==v[i-1]+1})||v.join(",")=="2,3,4,5,14";
+    var cn={};v.forEach(function(x){cn[x]=(cn[x]||0)+1});
+    var k=Object.keys(cn).map(function(x){return cn[x]}).sort(function(a,b){return b-a});
     if(st&&fl)return v[0]==10?"Royal Flush":"Straight Flush";
     if(k[0]==4)return"Four of a Kind";if(k[0]==3&&k[1]==2)return"Full House";if(fl)return"Flush";if(st)return"Straight";
     if(k[0]==3)return"Three of a Kind";if(k[0]==2&&k[1]==2)return"Two Pair";
-    if(k[0]==2&&+Object.keys(cn).find(x=>cn[x]==2)>=11)return"Jacks or Better";return"";
+    var jb=Object.keys(cn).find(function(x){return cn[x]==2&&+x>=11});
+    if(k[0]==2&&jb)return"Jacks or Better";return"";
   };
-  const blun=(h,hd)=>{const r=rank(h);if(!r)return 0;if(BG.includes(r))return!hd.every(Boolean);const c={};h.forEach(x=>c[x[0]]=(c[x[0]]||0)+1);return h.some((x,i)=>c[x[0]]>=2&&!hd[i])};
-  let dk,h=[],hd=[0,0,0,0,0],ph=0,bet=0;
-  G.innerHTML='<div class="felt"><div class="lab">JACKS OR BETTER</div><div class="row" id="pr"></div></div><p class="msg" id="m">Atur taruhan, lalu DEAL</p><button class="big" id="go">DEAL</button><p class="hint">Ketuk kartu untuk HOLD · Royal x250 · Str. Flush x50 · Four x25 · Full House x9 · Flush x6 · Straight x4 · Three x3 · Two Pair x2 · Jacks+ x1</p>';
-  const rd=()=>{
-    $("#pr").innerHTML=(h.length?h:[0,0,0,0,0]).map((c,i)=>cd(c,hd[i]?"hd":"")).join("");
-    [...$("#pr").children].forEach((e,i)=>e.onclick=()=>{
-      if(ph){sfx("click");hd[i]=!hd[i];rd();moved(hd[i]?"HOLD "+(h[i][0]=="T"?10:h[i][0])+h[i][1]:"Lepas HOLD","move_hold",.2)}
+  var blun=function(h,hd){var r=rank(h);if(!r)return 0;if(BG.indexOf(r)>=0)return!hd.every(Boolean);var c={};h.forEach(function(x){c[x[0]]=(c[x[0]]||0)+1});return h.some(function(x,i){return c[x[0]]>=2&&!hd[i]})};
+  var dk,h=[],hd=[0,0,0,0,0],ph=0,bet=0;
+  G.innerHTML='<div class="felt"><div class="lab">JACKS OR BETTER</div><div class="row" id="pr"></div></div><p class="msg" id="m">Atur taruhan, lalu DEAL</p><button type="button" class="big" id="go">DEAL</button><p class="hint">Ketuk kartu untuk HOLD · Royal x250 · Str. Flush x50 · Four x25 · Full House x9 · Flush x6 · Straight x4 · Three x3 · Two Pair x2 · Jacks+ x1</p>';
+  var rd=function(){
+    $("#pr").innerHTML=(h.length?h:[0,0,0,0,0]).map(function(c,i){return cd(c,hd[i]?"hd":"")}).join("");
+    Array.prototype.forEach.call($("#pr").children,function(e,i){
+      e.onclick=function(){if(ph){sfx("click");hd[i]=!hd[i];rd();moved(hd[i]?"HOLD "+(h[i][0]=="T"?10:h[i][0])+h[i][1]:"Lepas HOLD","move_hold",.2)}};
     });
   };
-  $("#go").onclick=()=>{
+  $("#go").onclick=function(){
     if(!ph){
       if(S.lock||!can())return;sfx("card");
-      bet=S.bet;pay(-bet);S.lock=1;dk=deck(1);h=[0,1,2,3,4].map(()=>dk.pop());hd=[0,0,0,0,0];ph=1;
+      bet=S.bet;pay(-bet);S.lock=1;dk=deck(1);h=[dk.pop(),dk.pop(),dk.pop(),dk.pop(),dk.pop()];hd=[0,0,0,0,0];ph=1;
       $("#go").textContent="DRAW";$("#m").textContent="Ketuk kartu untuk HOLD, lalu DRAW";rd();moved("DEAL "+$m(bet),"move_deal",.7,{taruhan:bet});
     }else{
       sfx("card");
-      const b=blun(h,hd);h=h.map((c,i)=>hd[i]?c:dk.pop());hd=[0,0,0,0,0];ph=0;S.lock=0;$("#go").textContent="DEAL";
-      const r=rank(h),m=r?PT[r]:0,w=bet*m;pay(w);rd();
+      var b=blun(h,hd);h=h.map(function(c,i){return hd[i]?c:dk.pop()});hd=[0,0,0,0,0];ph=0;S.lock=0;$("#go").textContent="DEAL";
+      var r=rank(h),m=r?PT[r]:0,w=bet*m;pay(w);rd();
       $("#m").textContent=r?r+"!  +"+$m(w):"Tidak ada kombinasi. Kalah.";
       res(m>1,{big:m>=6,bl:b,push:m==1},"DRAW",{taruhan:w||bet});
     }
@@ -508,129 +524,132 @@ function vp(){
 }
 
 /* 4. TEXAS HOLD'EM */
-const FULL=[];for(const r of RK)for(const s of SU)FULL.push([r,s]);
-const RV={};RK.split("").forEach((r,i)=>RV[r]=i+2);
-const HN=["High Card","Pair","Two Pair","Three of a Kind","Straight","Flush","Full House","Four of a Kind","Straight Flush"];
-const hn=s=>s[0]==8&&s[1]==14?"Royal Flush":HN[s[0]];
-const sHi=s=>{for(let h=14;h>=5;h--){let ok=1;for(let k=0;k<5;k++)if(!s.has(h-k)){ok=0;break}if(ok)return h}return[14,2,3,4,5].every(x=>s.has(x))?5:0};
-const cmp=(a,b)=>{for(let i=0;i<Math.max(a.length,b.length);i++){const d=(a[i]||0)-(b[i]||0);if(d)return d}return 0};
+var FULL=[];for(var _i=0;_i<RK.length;_i++)for(var _j=0;_j<SU.length;_j++)FULL.push([RK[_i],SU[_j]]);
+var RV={};RK.split("").forEach(function(r,i){RV[r]=i+2});
+var HN=["High Card","Pair","Two Pair","Three of a Kind","Straight","Flush","Full House","Four of a Kind","Straight Flush"];
+var hn=function(s){return s[0]==8&&s[1]==14?"Royal Flush":HN[s[0]]};
+var sHi=function(s){for(var h=14;h>=5;h--){var ok=1;for(var k=0;k<5;k++)if(!s.has(h-k)){ok=0;break}if(ok)return h}return[14,2,3,4,5].every(function(x){return s.has(x)})?5:0};
+var cmp=function(a,b){for(var i=0;i<Math.max(a.length,b.length);i++){var d=(a[i]||0)-(b[i]||0);if(d)return d}return 0};
 function best(c){
-  const rk=c.map(x=>RV[x[0]]),cn={},su={};rk.forEach(r=>cn[r]=(cn[r]||0)+1);c.forEach(x=>su[x[1]]=(su[x[1]]||0)+1);
-  const by=Object.entries(cn).map(([r,n])=>[+r,n]).sort((a,b)=>b[1]-a[1]||b[0]-a[0]),fs=Object.keys(su).find(s=>su[s]>=5);let fr=[];
-  if(fs){fr=c.filter(x=>x[1]==fs).map(x=>RV[x[0]]).sort((a,b)=>b-a);const h=sHi(new Set(fr));if(h)return[8,h]}
-  if(by[0][1]==4)return[7,by[0][0],Math.max(...rk.filter(r=>r!=by[0][0]))];
-  const tr=by.filter(x=>x[1]>=3).map(x=>x[0]),pr=by.filter(x=>x[1]>=2).map(x=>x[0]);
-  if(tr.length){const rest=pr.filter(r=>r!=tr[0]);if(rest.length)return[6,tr[0],Math.max(...rest)]}
-  if(fs)return[5,...fr.slice(0,5)];const h=sHi(new Set(rk));if(h)return[4,h];
-  const dn=rk.slice().sort((a,b)=>b-a);
-  if(tr.length){const t=tr[0];return[3,t,...dn.filter(r=>r!=t).slice(0,2)]}
-  if(pr.length>=2){const[a,b]=pr;return[2,a,b,Math.max(...rk.filter(r=>r!=a&&r!=b))]}
-  if(pr.length){const p=pr[0];return[1,p,...dn.filter(r=>r!=p).slice(0,3)]}
-  return[0,...dn.slice(0,5)];
+  var rk=c.map(function(x){return RV[x[0]]}),cn={},su={};
+  rk.forEach(function(r){cn[r]=(cn[r]||0)+1});c.forEach(function(x){su[x[1]]=(su[x[1]]||0)+1});
+  var by=Object.keys(cn).map(function(r){return[+r,cn[r]]}).sort(function(a,b){return b[1]-a[1]||b[0]-a[0]});
+  var fs=Object.keys(su).find(function(s){return su[s]>=5}),fr=[];
+  if(fs){fr=c.filter(function(x){return x[1]==fs}).map(function(x){return RV[x[0]]}).sort(function(a,b){return b-a});var h=sHi(new Set(fr));if(h)return[8,h]}
+  if(by[0][1]==4)return[7,by[0][0],Math.max.apply(null,rk.filter(function(r){return r!=by[0][0]}))];
+  var tr=by.filter(function(x){return x[1]>=3}).map(function(x){return x[0]}),pr=by.filter(function(x){return x[1]>=2}).map(function(x){return x[0]});
+  if(tr.length){var rest=pr.filter(function(r){return r!=tr[0]});if(rest.length)return[6,tr[0],Math.max.apply(null,rest)]}
+  if(fs)return[5].concat(fr.slice(0,5));var h2=sHi(new Set(rk));if(h2)return[4,h2];
+  var dn=rk.slice().sort(function(a,b){return b-a});
+  if(tr.length){var t=tr[0];return[3,t].concat(dn.filter(function(r){return r!=t}).slice(0,2))}
+  if(pr.length>=2){var a=pr[0],b=pr[1];return[2,a,b,Math.max.apply(null,rk.filter(function(r){return r!=a&&r!=b}))]}
+  if(pr.length){var p=pr[0];return[1,p].concat(dn.filter(function(r){return r!=p}).slice(0,3))}
+  return[0].concat(dn.slice(0,5));
 }
 function eq(hole,bd,n,sims){
-  const u=new Set([...hole,...bd].map(c=>c[0]+c[1])),dk=FULL.filter(c=>!u.has(c[0]+c[1])),need=5-bd.length;let w=0;
-  for(let i=0;i<sims;i++){
-    for(let j=0;j<need+2*n;j++){const m=j+R(dk.length-j);[dk[j],dk[m]]=[dk[m],dk[j]]}
-    const full=bd.concat(dk.slice(0,need)),me=best(hole.concat(full));let top=[0];
-    for(let o=0;o<n;o++){const s=best(dk.slice(need+2*o,need+2*o+2).concat(full));if(cmp(s,top)>0)top=s}
-    const c=cmp(me,top);w+=c>0?1:c==0?.5:0;
+  var u=new Set(hole.concat(bd).map(function(c){return c[0]+c[1]})),dk=FULL.filter(function(c){return!u.has(c[0]+c[1])}),need=5-bd.length,w=0;
+  for(var i=0;i<sims;i++){
+    for(var j=0;j<need+2*n;j++){var m=j+R(dk.length-j),tmp=dk[j];dk[j]=dk[m];dk[m]=tmp}
+    var full=bd.concat(dk.slice(0,need)),me=best(hole.concat(full)),top=[0];
+    for(var o=0;o<n;o++){var s=best(dk.slice(need+2*o,need+2*o+2).concat(full));if(cmp(s,top)>0)top=s}
+    var c=cmp(me,top);w+=c>0?1:c==0?.5:0;
   }
   return w/sims;
 }
 
-let Z=null;const H={bots:3,buyin:500,lv:"Normal",ph:"closed",fin:0,rev:0,win:[],msg:"Klik DUDUK untuk bergabung"};
-const BN=[["Mbak Rina","#f08fb4"],["Koh Aming","#6fc3a5"],["Pak Haji","#b99be0"],["Dek Bima","#7db4ea"],["Teh Sari","#ee8f85"]];
-const LV={Mudah:{c:.8,r:.5,b:0,z:.1,s:40},Normal:{c:1,r:.32,b:.05,z:.02,s:80},Susah:{c:1.08,r:.26,b:.12,z:0,s:130}};
-const rs=p=>{p.hole=[];p.bet=0;p.com=0;p.f=p.a=p.ac=0;p.last=""};
-const nxt=i=>(i+1)%Z.ps.length,pot=()=>Z.ps.reduce((s,p)=>s+p.com,0);
-const nA=i=>{for(let k=1;k<=Z.ps.length;k++){const j=(i+k)%Z.ps.length,p=Z.ps[j];if(!p.f&&!p.a)return j}return null};
-const nAct=i=>{for(let k=1;k<=Z.ps.length;k++){const j=(i+k)%Z.ps.length,p=Z.ps[j];if(!p.f&&!p.a&&(!p.ac||p.bet<Z.cb))return j}return null};
-const put=(p,a)=>{a=Math.max(0,Math.min(a,p.st));p.st-=a;p.bet+=a;p.com+=a;if(!p.st)p.a=1;return a};
-function over(){const al=Z.ps.filter(p=>!p.f);if(al.length<=1)return 1;const ac=al.filter(p=>!p.a);if(!ac.length)return 1;if(ac.length==1&&ac[0].bet>=Z.cb)return 1;return ac.every(p=>p.ac&&p.bet==Z.cb)}
-function act(i,k,amt=0){
-  const p=Z.ps[i],tc=Z.cb-p.bet;if(k=="check"&&tc>0)k="call";if(k=="call"&&tc<=0)k="check";
+var Z=null,H={bots:3,buyin:500,lv:"Normal",ph:"closed",fin:0,rev:0,win:[],msg:"Klik DUDUK untuk bergabung"};
+var BN=[["Mbak Rina","#f08fb4"],["Koh Aming","#6fc3a5"],["Pak Haji","#b99be0"],["Dek Bima","#7db4ea"],["Teh Sari","#ee8f85"]];
+var LV={Mudah:{c:.8,r:.5,b:0,z:.1,s:40},Normal:{c:1,r:.32,b:.05,z:.02,s:80},Susah:{c:1.08,r:.26,b:.12,z:0,s:130}};
+var rs=function(p){p.hole=[];p.bet=0;p.com=0;p.f=p.a=p.ac=0;p.last=""};
+var nxt=function(i){return(i+1)%Z.ps.length},pot=function(){return Z.ps.reduce(function(s,p){return s+p.com},0)};
+var nA=function(i){for(var k=1;k<=Z.ps.length;k++){var j=(i+k)%Z.ps.length,p=Z.ps[j];if(!p.f&&!p.a)return j}return null};
+var nAct=function(i){for(var k=1;k<=Z.ps.length;k++){var j=(i+k)%Z.ps.length,p=Z.ps[j];if(!p.f&&!p.a&&(!p.ac||p.bet<Z.cb))return j}return null};
+var put=function(p,a){a=Math.max(0,Math.min(a,p.st));p.st-=a;p.bet+=a;p.com+=a;if(!p.st)p.a=1;return a};
+function over(){var al=Z.ps.filter(function(p){return!p.f});if(al.length<=1)return 1;var ac=al.filter(function(p){return!p.a});if(!ac.length)return 1;if(ac.length==1&&ac[0].bet>=Z.cb)return 1;return ac.every(function(p){return p.ac&&p.bet==Z.cb})}
+function act(i,k,amt){
+  amt=amt||0;var p=Z.ps[i],tc=Z.cb-p.bet;if(k=="check"&&tc>0)k="call";if(k=="call"&&tc<=0)k="check";
   if(k=="fold"){p.f=1;p.last="Fold"}
   else if(k=="check")p.last="Check";
-  else if(k=="call"){const a=put(p,tc);p.last=p.a?"All-in "+p.bet:"Call "+a}
+  else if(k=="call"){var a=put(p,tc);p.last=p.a?"All-in "+p.bet:"Call "+a}
   else{
-    const tg=Math.min(amt,p.st+p.bet);if(tg<=Z.cb)return act(i,tc>0?"call":"check");
-    const vb=Z.cb?"Raise":"Bet";put(p,tg-p.bet);Z.mr=Math.max(Z.mr,p.bet-Z.cb);Z.cb=p.bet;
-    Z.ps.forEach(q=>q.ac=0);p.last=p.a?"All-in "+p.bet:vb+" "+p.bet;
+    var tg=Math.min(amt,p.st+p.bet);if(tg<=Z.cb)return act(i,tc>0?"call":"check");
+    var vb=Z.cb?"Raise":"Bet";put(p,tg-p.bet);Z.mr=Math.max(Z.mr,p.bet-Z.cb);Z.cb=p.bet;
+    Z.ps.forEach(function(q){q.ac=0});p.last=p.a?"All-in "+p.bet:vb+" "+p.bet;
   }
   p.ac=1;Z.turn=over()?null:nAct(i);
 }
 function nh(){
-  Z.ps.forEach(p=>{if(p.st<=0&&!p.hu)p.st=Z.buyin;rs(p)});
-  Z.btn=nxt(Z.btn);Z.dk=deck(1);Z.ps.forEach(p=>p.hole=[Z.dk.pop(),Z.dk.pop()]);Z.bd=[];Z.s=0;Z.mr=Z.bb;
-  const sb=Z.ps.length==2?Z.btn:nxt(Z.btn),bb=nxt(sb);
+  Z.ps.forEach(function(p){if(p.st<=0&&!p.hu)p.st=Z.buyin;rs(p)});
+  Z.btn=nxt(Z.btn);Z.dk=deck(1);Z.ps.forEach(function(p){p.hole=[Z.dk.pop(),Z.dk.pop()]});Z.bd=[];Z.s=0;Z.mr=Z.bb;
+  var sb=Z.ps.length==2?Z.btn:nxt(Z.btn),bb=nxt(sb);
   put(Z.ps[sb],Z.sb);put(Z.ps[bb],Z.bb);
   Z.ps[sb].last="SB "+Z.ps[sb].bet;Z.ps[bb].last="BB "+Z.ps[bb].bet;
-  Z.cb=Math.max(...Z.ps.map(p=>p.bet));Z.turn=over()?null:nA(bb);
+  Z.cb=Math.max.apply(null,Z.ps.map(function(p){return p.bet}));Z.turn=over()?null:nA(bb);
 }
 function ns(){
-  Z.s++;Z.ps.forEach(p=>{p.bet=0;p.ac=0;p.last=""});Z.cb=0;Z.mr=Z.bb;
-  for(let k=0;k<(Z.s==1?3:1);k++)Z.bd.push(Z.dk.pop());
+  Z.s++;Z.ps.forEach(function(p){p.bet=0;p.ac=0;p.last=""});Z.cb=0;Z.mr=Z.bb;
+  for(var k=0;k<(Z.s==1?3:1);k++)Z.bd.push(Z.dk.pop());
   Z.turn=over()?null:nA(Z.btn);sfx("card");
 }
 function settle(){
-  const n=Z.ps.length,al=Z.ps.map((p,i)=>i).filter(i=>!Z.ps[i].f),py=Z.ps.map(()=>0),sc={};
+  var n=Z.ps.length,al=Z.ps.map(function(p,i){return i}).filter(function(i){return!Z.ps[i].f}),py=Z.ps.map(function(){return 0}),sc={};
   if(al.length==1)py[al[0]]=pot();
   else{
-    al.forEach(i=>sc[i]=best(Z.ps[i].hole.concat(Z.bd)));let prev=0;
-    for(const lv of[...new Set(Z.ps.filter(p=>p.com>0).map(p=>p.com))].sort((a,b)=>a-b)){
-      const sl=Z.ps.reduce((s,p)=>s+Math.min(p.com,lv)-Math.min(p.com,prev),0);
-      let el=al.filter(i=>Z.ps[i].com>=lv);if(!el.length)el=al;
-      const bs=el.reduce((b,i)=>cmp(sc[i],b)>0?sc[i]:b,sc[el[0]]),k=i=>((i-Z.btn-1)%n+n)%n;
-      const w=el.filter(i=>!cmp(sc[i],bs)).sort((a,b)=>k(a)-k(b)),sh1=Math.floor(sl/w.length),rm=sl%w.length;
-      w.forEach((i,j)=>py[i]+=sh1+(j<rm?1:0));prev=lv;
-    }
+    al.forEach(function(i){sc[i]=best(Z.ps[i].hole.concat(Z.bd))});var prev=0;
+    var lvs=[];Z.ps.forEach(function(p){if(p.com>0&&lvs.indexOf(p.com)<0)lvs.push(p.com)});lvs.sort(function(a,b){return a-b});
+    lvs.forEach(function(lv){
+      var sl=Z.ps.reduce(function(s,p){return s+Math.min(p.com,lv)-Math.min(p.com,prev)},0);
+      var el=al.filter(function(i){return Z.ps[i].com>=lv});if(!el.length)el=al;
+      var bs=el.reduce(function(b,i){return cmp(sc[i],b)>0?sc[i]:b},sc[el[0]]),k=function(i){return((i-Z.btn-1)%n+n)%n};
+      var w=el.filter(function(i){return!cmp(sc[i],bs)}).sort(function(a,b){return k(a)-k(b)}),sh1=Math.floor(sl/w.length),rm=sl%w.length;
+      w.forEach(function(i,j){py[i]+=sh1+(j<rm?1:0)});prev=lv;
+    });
   }
-  Z.ps.forEach((p,i)=>p.st+=py[i]);return[py,sc];
+  Z.ps.forEach(function(p,i){p.st+=py[i]});return[py,sc];
 }
 function bot(i){
-  const p=Z.ps[i],l=LV[H.lv],n=Z.ps.filter(q=>q!=p&&!q.f).length,e=eq(p.hole,Z.bd,n,l.s),fr=1/(n+1),s=(e-fr)/(1-fr),tc=Z.cb-p.bet,pt=pot(),top=p.st+p.bet,mn=Math.min(top,Z.cb+Z.mr),cr=top>Z.cb;
-  const sz=f=>Math.max(mn,Math.min(top,Z.cb+Math.floor((pt+tc)*f)));
-  if(Math.random()<l.z){const o=[tc?"call":"check",...(tc?["fold"]:[]),...(cr?["raise"]:[])],k=pick(o);return[k,k=="raise"?mn:0]}
+  var p=Z.ps[i],l=LV[H.lv],n=Z.ps.filter(function(q){return q!=p&&!q.f}).length,e=eq(p.hole,Z.bd,n,l.s),fr=1/(n+1),s=(e-fr)/(1-fr),tc=Z.cb-p.bet,pt=pot(),top=p.st+p.bet,mn=Math.min(top,Z.cb+Z.mr),cr=top>Z.cb;
+  var sz=function(f){return Math.max(mn,Math.min(top,Z.cb+Math.floor((pt+tc)*f)))};
+  if(Math.random()<l.z){var o=[tc?"call":"check"].concat(tc?["fold"]:[]).concat(cr?["raise"]:[]),k=pick(o);return[k,k=="raise"?mn:0]}
   if(tc<=0){if(cr&&s>l.r)return["raise",sz(pick([.5,.75,1]))];if(cr&&s>.12&&Math.random()<.4)return["raise",sz(.4)];if(cr&&s<.05&&Z.s<3&&Math.random()<l.b)return["raise",sz(.6)];return["check",0]}
-  const nd=tc/(pt+tc);if(cr&&s>l.r+.2&&Math.random()<.6)return["raise",s>.8&&Math.random()<.5?top:sz(pick([.6,.8,1]))];
+  var nd=tc/(pt+tc);if(cr&&s>l.r+.2&&Math.random()<.6)return["raise",s>.8&&Math.random()<.5?top:sz(pick([.6,.8,1]))];
   if(e>nd*l.c)return["call",0];if(cr&&Math.random()<l.b*.5)return["raise",sz(.7)];return["fold",0];
 }
 function judge(k,amt){
-  const p=Z.ps[0],n=Z.ps.filter((q,i)=>i&&!q.f).length,tc=Z.cb-p.bet,e=eq(p.hole,Z.bd,n,90),nd=tc>0?tc/(pot()+tc):0;
+  var p=Z.ps[0],n=Z.ps.filter(function(q,i){return i&&!q.f}).length,tc=Z.cb-p.bet,e=eq(p.hole,Z.bd,n,90),nd=tc>0?tc/(pot()+tc):0;
   if(k=="fold"&&e>nd+.18&&e>.4)return"blunder_fold";
   if(k=="call"&&tc>=.25*(p.st+p.bet)&&e<Math.min(.25,nd*.6))return"blunder_call";
   if(k=="raise"&&amt-p.bet>=.6*p.st&&e<.3)return"blunder_allin";return"";
 }
 function lab(k,a){
-  const p=Z.ps[0],tc=Z.cb-p.bet;
+  var p=Z.ps[0],tc=Z.cb-p.bet;
   if(k=="fold")return["Kamu: Fold","move_fold",0];
   if(k=="check"||(k=="call"&&tc<=0))return["Kamu: Check","move_check",0];
-  if(k=="call"){const x=Math.min(tc,p.st);return x>=p.st?["Kamu: All-in "+x,"move_allin",x]:["Kamu: Call "+x,"move_call",x]}
+  if(k=="call"){var x=Math.min(tc,p.st);return x>=p.st?["Kamu: All-in "+x,"move_allin",x]:["Kamu: Call "+x,"move_call",x]}
   return a>=p.st+p.bet?["Kamu: All-in "+p.st,"move_allin",p.st]:[(Z.cb?"Kamu: Raise ke ":"Kamu: Bet ")+a,"move_raise",a];
 }
-const spk=(i,ev,mv,x={})=>{if(!Z)return;const p=Z.ps[i]||Z.ps[1];CH.hd=[p.n,p.c];say(ev,mv,x)},rb=()=>1+R(Z.ps.length-1);
+var spk=function(i,ev,mv,x){if(!Z)return;var p=Z.ps[i]||Z.ps[1];CH.hd=[p.n,p.c];say(ev,mv,x)},rb=function(){return 1+R(Z.ps.length-1)};
 function step(){
-  if(!Z)return;if(Z.ps.filter(p=>!p.f).length==1)return endh();
-  let ov=over();if(!ov&&Z.turn==null){Z.turn=nAct(Z.btn);ov=Z.turn==null}
+  if(!Z)return;if(Z.ps.filter(function(p){return!p.f}).length==1)return endh();
+  var ov=over();if(!ov&&Z.turn==null){Z.turn=nAct(Z.btn);ov=Z.turn==null}
   if(ov){if(Z.s==3)return endh();ns();H.msg=["Flop","Turn","River"][Z.s-1];hr();return setTimeout(step,800)}
   if(Z.turn==0){H.ph="human";H.msg="Giliran kamu";return hr()}
-  const i=Z.turn;H.ph="bot";hr();
-  setTimeout(()=>{
-    if(!Z)return;const[k,a]=bot(i);act(i,k,a);const p=Z.ps[i];
-    if(k=="raise"){const ch=p.n+": "+p.last;p.a&&Math.random()<.6?spk(i,"allin_bot",ch,{taruhan:p.bet}):toast(ch)}
+  var i=Z.turn;H.ph="bot";hr();
+  setTimeout(function(){
+    if(!Z)return;var resB=bot(i),k=resB[0],a=resB[1];act(i,k,a);var p=Z.ps[i];
+    if(k=="raise"){var ch=p.n+": "+p.last;p.a&&Math.random()<.6?spk(i,"allin_bot",ch,{taruhan:p.bet}):toast(ch)}
     hr();setTimeout(step,500);
   },900*S.spd);
 }
 function endh(){
   if(!Z)return;
-  const me=Z.ps[0],al=Z.ps.map((p,i)=>i).filter(i=>!Z.ps[i].f),ct=al.length>1,cm=Z.ps.map(p=>p.com),[py,sc]=settle();
+  var me=Z.ps[0],al=Z.ps.map(function(p,i){return i}).filter(function(i){return!Z.ps[i].f}),ct=al.length>1,cm=Z.ps.map(function(p){return p.com}),stRes=settle(),py=stRes[0],sc=stRes[1];
   H.fin=1;H.rev=ct;S.rounds++;save();
-  const w=py.map((a,i)=>a>0?i:-1).filter(i=>i>=0),top=w.reduce((b,i)=>py[i]>py[b]?i:b,w[0]);
-  H.win=w;if(ct)al.forEach(i=>Z.ps[i].last=hn(sc[i]));
+  var w=py.map(function(a,i){return a>0?i:-1}).filter(function(i){return i>=0}),top=w.reduce(function(b,i){return py[i]>py[b]?i:b},w[0]);
+  H.win=w;if(ct)al.forEach(function(i){Z.ps[i].last=hn(sc[i])});
   H.msg=Z.ps[top].n+" menang "+$m(py[top])+(ct?" dengan "+hn(sc[top]):" (semua lawan fold)");
-  const bl=Z.ps.map((p,i)=>i).slice(1).filter(i=>!w.includes(i));
-  if(w.includes(0)){
+  var bl=Z.ps.map(function(p,i){return i}).slice(1).filter(function(i){return w.indexOf(i)<0});
+  if(w.indexOf(0)>=0){
     S.streak=0;sfx("win");
     spk(pick(bl.length?bl:[top]),!ct?"fold_win":py[0]-cm[0]>=Z.buyin*.4?"bigwin":"win","",{taruhan:py[0]});
   }else if(!me.f){
@@ -642,101 +661,103 @@ function endh(){
   else H.ph="between";
   hr();
 }
-const HX=window.HX={
-  sit(){
-    const b=+$("#hb").value,by=+$("#hy").value;H.bots=b;H.buyin=by;H.lv=$("#hl").value;
+var HX=window.HX={
+  sit:function(){
+    var b=+$("#hb").value,by=+$("#hy").value;H.bots=b;H.buyin=by;H.lv=$("#hl").value;
     if(S.bal<by)return toast("Saldo kurang untuk buy-in");
     sfx("click");pay(-by);
-    Z={ps:[{n:"Kamu",hu:1,st:by},...BN.slice(0,b).map(x=>({n:x[0],c:x[1],st:by}))],buyin:by,sb:Math.max(1,Math.round(by/100)),btn:R(b+1)};
+    Z={ps:[{n:"Kamu",hu:1,st:by}].concat(BN.slice(0,b).map(function(x){return{n:x[0],c:x[1],st:by}})),buyin:by,sb:Math.max(1,Math.round(by/100)),btn:R(b+1)};
     Z.bb=Z.sb*2;Z.ps.forEach(rs);spk(rb(),"greet");HX.next();
   },
-  next(){sfx("card");nh();H.fin=0;H.rev=0;H.win=[];H.msg="Preflop";H.ph="bot";S.lock=1;hr();setTimeout(step,600)},
-  leave(){if(H.ph!="between")return;sfx("click");const st=Z.ps[0].st;pay(st);spk(rb(),st>Z.buyin?"win":"lose","",{taruhan:Math.abs(st-Z.buyin)||st});Z=null;H.ph="closed";H.msg="Kamu pulang membawa "+$m(st);hr()},
-  again(){sfx("click");Z=null;H.ph="closed";H.msg="Klik DUDUK untuk bergabung";hr()},
-  a(k,amt=0){
-    if(H.ph!="human")return;sfx("click");
-    const ev=judge(k,amt),[mv,me,tVal]=lab(k,amt);H.ph="bot";act(0,k,amt);H.msg="";hr();
-    const txObj={taruhan:tVal||Z.cb||Z.bb};
+  next:function(){sfx("card");nh();H.fin=0;H.rev=0;H.win=[];H.msg="Preflop";H.ph="bot";S.lock=1;hr();setTimeout(step,600)},
+  leave:function(){if(H.ph!="between")return;sfx("click");var st=Z.ps[0].st;pay(st);spk(rb(),st>Z.buyin?"win":"lose","",{taruhan:Math.abs(st-Z.buyin)||st});Z=null;H.ph="closed";H.msg="Kamu pulang membawa "+$m(st);hr()},
+  again:function(){sfx("click");Z=null;H.ph="closed";H.msg="Klik DUDUK untuk bergabung";hr()},
+  a:function(k,amt){
+    amt=amt||0;if(H.ph!="human")return;sfx("click");
+    var ev=judge(k,amt),lb=lab(k,amt),mv=lb[0],me=lb[1],tVal=lb[2];H.ph="bot";act(0,k,amt);H.msg="";hr();
+    var txObj={taruhan:tVal||Z.cb||Z.bb};
     if(ev)spk(rb(),ev,mv,txObj);else Math.random()<.75?spk(rb(),me,mv,txObj):toast(mv);
     setTimeout(step,500);
   },
-  allin(){const p=Z.ps[0];p.st+p.bet>Z.cb?HX.a("raise",p.st+p.bet):HX.a("call")},
-  raise(){HX.a("raise",+$("#rg").value)},
-  sl(){const r=$("#rg");if(r)$("#rb").textContent=(Z.cb?"Raise ke ":"Bet ")+$m(+r.value)},
-  q(f){const p=Z.ps[0],tc=Z.cb-p.bet,r=$("#rg");if(!r)return;const v=f?Z.cb+Math.max(Z.mr,Math.floor((pot()+tc)*f)):+r.min;r.value=Math.max(+r.min,Math.min(+r.max,v));HX.sl()}
+  allin:function(){var p=Z.ps[0];p.st+p.bet>Z.cb?HX.a("raise",p.st+p.bet):HX.a("call")},
+  raise:function(){HX.a("raise",+$("#rg").value)},
+  sl:function(){var r=$("#rg");if(r)$("#rb").textContent=(Z.cb?"Raise ke ":"Bet ")+$m(+r.value)},
+  q:function(f){var p=Z.ps[0],tc=Z.cb-p.bet,r=$("#rg");if(!r)return;var v=f?Z.cb+Math.max(Z.mr,Math.floor((pot()+tc)*f)):+r.min;r.value=Math.max(+r.min,Math.min(+r.max,v));HX.sl()}
 };
 function hr(){
-  if(S.g!="hd")return;const e=$("#hz");if(!e)return;
+  if(S.g!="hd")return;var e=$("#hz");if(!e)return;
   if(!Z){
-    const o=(a,v)=>a.map(x=>`<option${x==v?" selected":""}>${x}</option>`).join("");
-    e.innerHTML=`<div class="felt"><div class="lab">TEXAS HOLD’EM</div><p class="pot">${H.msg}</p><div class="cfg"><label>Bot <select id="hb">${o([1,2,3,4,5],H.bots)}</select></label><label>Buy-in <select id="hy">${o([200,500,1000],H.buyin)}</select></label><label>Level <select id="hl">${o(Object.keys(LV),H.lv)}</select></label></div></div><button class="big" onclick="HX.sit()">DUDUK</button><p class="hint">Buy-in diambil dari saldo dan dikembalikan saat kamu pulang.</p>`;
+    var o=function(a,v){return a.map(function(x){return"<option"+(x==v?" selected":"")+">"+x+"</option>"}).join("")};
+    e.innerHTML='<div class="felt"><div class="lab">TEXAS HOLD’EM</div><p class="pot">'+H.msg+'</p><div class="cfg"><label>Bot <select id="hb">'+o([1,2,3,4,5],H.bots)+'</select></label><label>Buy-in <select id="hy">'+o([200,500,1000],H.buyin)+'</select></label><label>Level <select id="hl">'+o(Object.keys(LV),H.lv)+'</select></label></div></div><button type="button" class="big" onclick="HX.sit()">DUDUK</button><p class="hint">Buy-in diambil dari saldo dan dikembalikan saat kamu pulang.</p>';
     return;
   }
-  const me=Z.ps[0],tc=Z.cb-me.bet,top=me.st+me.bet,hum=H.ph=="human",lo=Math.min(top,Z.cb+Z.mr);
-  const bots=Z.ps.slice(1).map((p,k)=>`<div class="bt${p.f?" f":""}${Z.turn==k+1&&!H.fin?" ac":""}${H.win.includes(k+1)&&H.fin?" ac":""}"><b>${p.n}${Z.btn==k+1?" Ⓓ":""}</b><span>${$m(p.st)}</span><i>${p.f?"FOLD":p.last}</i><div>${p.f?"":p.hole.map(c=>H.rev?cd(c,"sm"):'<span class="mini"></span>').join("")}</div></div>`).join("");
-  const bd=[0,1,2,3,4].map(i=>Z.bd[i]?cd(Z.bd[i],"md"):'<div class="cd md em"></div>').join("");
-  let ctl;
-  if(hum)ctl=`<div class="acts"><button class="bad" onclick="HX.a('fold')">Fold</button><button class="bl" onclick="HX.a('${tc?"call":"check"}')">${tc?"Call "+$m(Math.min(tc,me.st)):"Check"}</button><button onclick="HX.allin()">All-in ${$m(me.st)}</button></div>`+(top>Z.cb&&lo<top?`<div class="rz"><button onclick="HX.q(0)">Min</button><button onclick="HX.q(.5)">½</button><button onclick="HX.q(1)">Pot</button><input id="rg" type="range" min="${lo}" max="${top}" value="${lo}" oninput="HX.sl()"><button class="bl" id="rb" onclick="HX.raise()">${Z.cb?"Raise ke ":"Bet "}${$m(lo)}</button></div>`:"");
-  else if(H.ph=="between")ctl=`<div class="acts"><button class="big2" onclick="HX.next()">Tangan berikutnya</button><button onclick="HX.leave()">Pulang (${$m(me.st)})</button></div>`;
-  else if(H.ph=="over")ctl=`<div class="acts"><button class="big2" onclick="HX.again()">Duduk lagi</button></div>`;
+  var me=Z.ps[0],tc=Z.cb-me.bet,top=me.st+me.bet,hum=H.ph=="human",lo=Math.min(top,Z.cb+Z.mr);
+  var bots=Z.ps.slice(1).map(function(p,k){return'<div class="bt'+(p.f?" f":"")+(Z.turn==k+1&&!H.fin?" ac":"")+(H.win.indexOf(k+1)>=0&&H.fin?" ac":"")+'"><b>'+p.n+(Z.btn==k+1?" Ⓓ":"")+'</b><span>'+$m(p.st)+'</span><i>'+(p.f?"FOLD":p.last)+'</i><div>'+(p.f?"":p.hole.map(function(c){return H.rev?cd(c,"sm"):'<span class="mini"></span>'}).join(""))+'</div></div>'}).join("");
+  var bd=[0,1,2,3,4].map(function(i){return Z.bd[i]?cd(Z.bd[i],"md"):'<div class="cd md em"></div>'}).join("");
+  var ctl;
+  if(hum)ctl='<div class="acts"><button type="button" class="bad" onclick="HX.a(\'fold\')">Fold</button><button type="button" class="bl" onclick="HX.a(\''+(tc?"call":"check")+'\')">'+(tc?"Call "+$m(Math.min(tc,me.st)):"Check")+'</button><button type="button" onclick="HX.allin()">All-in '+$m(me.st)+'</button></div>'+(top>Z.cb&&lo<top?'<div class="rz"><button type="button" onclick="HX.q(0)">Min</button><button type="button" onclick="HX.q(.5)">½</button><button type="button" onclick="HX.q(1)">Pot</button><input id="rg" type="range" min="'+lo+'" max="'+top+'" value="'+lo+'" oninput="HX.sl()"><button type="button" class="bl" id="rb" onclick="HX.raise()">'+(Z.cb?"Raise ke ":"Bet ")+$m(lo)+'</button></div>':"");
+  else if(H.ph=="between")ctl='<div class="acts"><button type="button" class="big2" onclick="HX.next()">Tangan berikutnya</button><button type="button" onclick="HX.leave()">Pulang ('+$m(me.st)+')</button></div>';
+  else if(H.ph=="over")ctl='<div class="acts"><button type="button" class="big2" onclick="HX.again()">Duduk lagi</button></div>';
   else ctl='<p class="hint">Menunggu giliran…</p>';
-  e.innerHTML=`<div class="bots">${bots}</div><div class="felt"><div class="row">${bd}</div><p class="pot">Pot: ${$m(H.fin?0:pot())}</p><p class="pot sub">${H.msg}</p><div class="row">${me.f?"":me.hole.map(c=>cd(c,"lg")).join("")}</div><div class="pot sub">Kamu · ${$m(me.st)} ${me.f?"· FOLD":me.last?"· "+me.last:""}${Z.btn==0?" Ⓓ":""}</div></div>${ctl}`;
+  e.innerHTML='<div class="bots">'+bots+'</div><div class="felt"><div class="row">'+bd+'</div><p class="pot">Pot: '+$m(H.fin?0:pot())+'</p><p class="pot sub">'+H.msg+'</p><div class="row">'+(me.f?"":me.hole.map(function(c){return cd(c,"lg")}).join(""))+'</div><div class="pot sub">Kamu · '+$m(me.st)+' '+(me.f?"· FOLD":me.last?"· "+me.last:"")+(Z.btn==0?" Ⓓ":"")+'</div></div>'+ctl;
 }
 function hold(){G.innerHTML='<div id="hz"></div>';hr()}
 
 /* 5. ROULETTE */
-const RED=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
+var RED=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
 function roul(){
-  let bets={},busy=0,hist=[],win=null,sh=null;
-  const OUT=[['low','1-18',n=>n>=1&&n<=18,2],['even','Genap',n=>n>0&&n%2==0,2],['red','Merah',n=>RED.has(n),2],['black','Hitam',n=>n>0&&!RED.has(n),2],['odd','Ganjil',n=>n%2==1,2],['high','19-36',n=>n>=19,2],['d1','1-12',n=>n>=1&&n<=12,3],['d2','13-24',n=>n>=13&&n<=24,3],['d3','25-36',n=>n>=25,3]],O=Object.fromEntries(OUT.map(o=>[o[0],o]));
-  const col=n=>n===null?'':n==0?'g':RED.has(n)?'r':'k',tot=()=>Object.values(bets).reduce((a,b)=>a+b,0);
-  roulRefund=()=>{if(!busy&&tot()>0){pay(tot());bets={};S.lock=0}};
-  G.innerHTML=`<div class='felt'><canvas id='wl' width='340' height='340' style='width:min(88vw,340px);height:auto'></canvas><div class='rr'><span class='rb' id='rn'>--</span><div id='rh' class='rhh'></div></div><div class='bd'><button class='n g' data-k='0'>0</button>${[...Array(36)].map((_,i)=>`<button class='n ${col(i+1)}' data-k='${i+1}'>${i+1}</button>`).join('')}</div><div class='od'>${OUT.map(o=>`<button class='n ${o[0]=='red'?'r':o[0]=='black'?'k':''}' data-k='${o[0]}'>${o[1]}</button>`).join('')}</div></div><p class='msg' id='m'>Ketuk kotak untuk pasang chip</p><div class='acts'><button class='big2' id='sp'>PUTAR</button><button id='cl'>Batal taruhan</button></div><div class='rz' style='justify-content:center'>Chip <button id='c-'>−</button><b id='cv'></b><button id='c+'>+</button></div>`;
-  const rd=()=>{
+  var bets={},busy=0,hist=[],win=null,sh=null;
+  var OUT=[['low','1-18',function(n){return n>=1&&n<=18},2],['even','Genap',function(n){return n>0&&n%2==0},2],['red','Merah',function(n){return RED.has(n)},2],['black','Hitam',function(n){return n>0&&!RED.has(n)},2],['odd','Ganjil',function(n){return n%2==1},2],['high','19-36',function(n){return n>=19},2],['d1','1-12',function(n){return n>=1&&n<=12},3],['d2','13-24',function(n){return n>=13&&n<=24},3],['d3','25-36',function(n){return n>=25},3]],O={};
+  OUT.forEach(function(o){O[o[0]]=o});
+  var col=function(n){return n===null?'':n==0?'g':RED.has(n)?'r':'k'},tot=function(){return Object.keys(bets).reduce(function(a,k){return a+bets[k]},0)};
+  roulRefund=function(){if(!busy&&tot()>0){pay(tot());bets={};S.lock=0}};
+  var nums="";for(var i=1;i<=36;i++)nums+="<button type='button' class='n "+col(i)+"' data-k='"+i+"'>"+i+"</button>";
+  G.innerHTML="<div class='felt'><canvas id='wl' width='340' height='340' style='width:min(88vw,340px);height:auto'></canvas><div class='rr'><span class='rb' id='rn'>--</span><div id='rh' class='rhh'></div></div><div class='bd'><button type='button' class='n g' data-k='0'>0</button>"+nums+"</div><div class='od'>"+OUT.map(function(o){return"<button type='button' class='n "+(o[0]=='red'?'r':o[0]=='black'?'k':'')+"' data-k='"+o[0]+"'>"+o[1]+"</button>"}).join('')+"</div></div><p class='msg' id='m'>Ketuk kotak untuk pasang chip</p><div class='acts'><button type='button' class='big2' id='sp'>PUTAR</button><button type='button' id='cl'>Batal taruhan</button></div><div class='rz' style='justify-content:center'>Chip <button type='button' id='c-'>−</button><b id='cv'></b><button type='button' id='c+'>+</button></div>";
+  var rd=function(){
     wheelDraw();
-    G.querySelectorAll('.n').forEach(b=>{
-      const k=b.dataset.k,v=bets[k];
+    Array.prototype.forEach.call(G.querySelectorAll('.n'),function(b){
+      var k=b.dataset.k,v=bets[k];
       v?b.dataset.c=$m(v):b.removeAttribute('data-c');
       b.classList.toggle('w',win!==null&&!busy&&(isNaN(k)?O[k][2](win):+k===win));
     });
-    const r=$('#rn');if(r){r.textContent=sh===null?'--':sh;r.className='rb '+col(sh)}
-    const rh=$('#rh');if(rh)rh.innerHTML=hist.map(n=>`<i class='${col(n)}'>${n}</i>`).join('');
-    const cv=$('#cv');if(cv)cv.textContent=$m(S.bet);
+    var r=$('#rn');if(r){r.textContent=sh===null?'--':sh;r.className='rb '+col(sh)}
+    var rh=$('#rh');if(rh)rh.innerHTML=hist.map(function(n){return"<i class='"+col(n)+"'>"+n+"</i>"}).join('');
+    var cv=$('#cv');if(cv)cv.textContent=$m(S.bet);
     S.lock=tot()||busy?1:0;
   };
-  G.querySelector('.felt').onclick=e=>{
-    const btn=e.target.closest('.n');if(!btn)return;
-    const k=btn.dataset.k;if(busy||k===undefined)return;
+  G.querySelector('.felt').onclick=function(e){
+    var btn=e.target.closest('.n');if(!btn)return;
+    var k=btn.dataset.k;if(busy||k===undefined)return;
     if(S.bal<S.bet)return toast('Saldo kurang');
     sfx("click");
-    const c=S.bet;pay(-c);bets[k]=(bets[k]||0)+c;rd();
+    var c=S.bet;pay(-c);bets[k]=(bets[k]||0)+c;rd();
     moved('Chip '+$m(c)+' · '+(O[k]?O[k][1]:k),'move_chip',.35,{taruhan:c});
   };
-  $('#sp').onclick=()=>{
+  $('#sp').onclick=function(){
     if(busy||!tot())return;sfx("card");
-    const st=tot(),risky=st>=.5*(S.bal+st),f=R(37);
+    var st=tot(),risky=st>=.5*(S.bal+st),f=R(37);
     busy=1;win=null;sh=null;rd();
     moved('PUTAR '+$m(st),'move_spin',.7,{taruhan:st});
-    wheelAnim(f,4200*S.spd,()=>{
-      sh=f;let w=0;
-      for(const[k,a]of Object.entries(bets))w+=isNaN(k)?(O[k][2](f)?a*O[k][3]:0):(+k===f?a*36:0);
-      busy=0;win=f;hist=[f,...hist].slice(0,10);bets={};pay(w);rd();
+    wheelAnim(f,4200*S.spd,function(){
+      sh=f;var w=0;
+      Object.keys(bets).forEach(function(k){var a=bets[k];w+=isNaN(k)?(O[k][2](f)?a*O[k][3]:0):(+k===f?a*36:0)});
+      busy=0;win=f;hist=[f].concat(hist).slice(0,10);bets={};pay(w);rd();
       $('#m').textContent='Keluar '+f+'. '+(w?'Menang '+$m(w)+'!':'Kalah '+$m(st)+'.');
       res(w>st,{big:w>=5*st,bl:risky,push:w==st},"",{taruhan:w||st});
     });
   };
-  $('#cl').onclick=()=>{if(busy||!tot())return;sfx("click");pay(tot());bets={};rd();moved('Batal taruhan','move_clear',.8)};
-  $('#c-').onclick=()=>{if(!busy){sfx("click");S.bet=Math.max(10,S.bet-10);draw();rd()}};
-  document.getElementById('c+').onclick=()=>{if(!busy){sfx("click");S.bet=Math.min(Math.max(10,S.bal),S.bet+10);draw();rd()}};
+  $('#cl').onclick=function(){if(busy||!tot())return;sfx("click");pay(tot());bets={};rd();moved('Batal taruhan','move_clear',.8)};
+  $('#c-').onclick=function(){if(!busy){sfx("click");S.bet=Math.max(10,S.bet-10);draw();rd()}};
+  document.getElementById('c+').onclick=function(){if(!busy){sfx("click");S.bet=Math.min(Math.max(10,S.bal),S.bet+10);draw();rd()}};
   rd();
 }
-const WO=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26],WS={a:0,run:0,f:undefined},WA=2*Math.PI/37;
+var WO=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26],WS={a:0,run:0,f:undefined},WA=2*Math.PI/37;
 function wf(wa,ba,br){
-  const c=document.getElementById('wl');if(!c)return;
-  const x=c.getContext('2d'),cx=c.width/2,R0=cx-4,R1=R0*.74,R2=R0*.52;
+  var c=document.getElementById('wl');if(!c)return;
+  var x=c.getContext('2d'),cx=c.width/2,R0=cx-4,R1=R0*.74,R2=R0*.52;
   x.clearRect(0,0,c.width,c.width);x.save();x.translate(cx,cx);x.rotate(wa);
-  WO.forEach((n,i)=>{
-    const a0=i*WA-Math.PI/2-WA/2;x.beginPath();x.moveTo(0,0);x.arc(0,0,R0,a0,a0+WA);x.closePath();
+  WO.forEach(function(n,i){
+    var a0=i*WA-Math.PI/2-WA/2;x.beginPath();x.moveTo(0,0);x.arc(0,0,R0,a0,a0+WA);x.closePath();
     x.fillStyle=n==0?'#3f8a68':RED.has(n)?'#b9505a':'#383f4d';x.fill();x.strokeStyle='#e9cf9a88';x.lineWidth=1;x.stroke();
     x.save();x.rotate(a0+WA/2);x.translate(R0*.9,0);x.rotate(Math.PI/2);x.fillStyle='#fff';x.font='bold 15px system-ui';x.textAlign='center';x.fillText(n,0,4);x.restore();
   });
@@ -745,17 +766,17 @@ function wf(wa,ba,br){
   x.beginPath();x.arc(0,0,R2*.5,0,7);x.fillStyle='#8f6516';x.fill();
   x.restore();
   if(ba!==null){
-    x.beginPath();const q=R0/116;
+    x.beginPath();var q=R0/116;
     x.arc(cx+br*q*Math.cos(ba),cx+br*q*Math.sin(ba),6*q,0,7);
     x.fillStyle='#fff';x.fill();x.strokeStyle='#0007';x.lineWidth=1.5;x.stroke();
   }
 }
-const pkA=f=>WO.indexOf(f)*WA-Math.PI/2;
+var pkA=function(f){return WO.indexOf(f)*WA-Math.PI/2};
 function wheelDraw(){if(WS.run)return;wf(WS.a,WS.f===undefined?null:WS.a+pkA(WS.f),97)}
 function wheelAnim(f,ms,cb){
-  WS.run=1;WS.f=undefined;const t0=performance.now(),w0=WS.a,pk=pkA(f);
+  WS.run=1;WS.f=undefined;var t0=performance.now(),w0=WS.a,pk=pkA(f);
   (function fr(now){
-    const p=Math.min(1,(now-t0)/ms),e=1-Math.pow(1-p,3);
+    var p=Math.min(1,(now-t0)/ms),e=1-Math.pow(1-p,3);
     WS.a=w0+5*(1-Math.pow(1-p,2));
     wf(WS.a,WS.a+pk-Math.PI*12*(1-e),97+19*(1-e));
     if(p<1)requestAnimationFrame(fr);else{WS.run=0;WS.f=f;wheelDraw();if(cb)cb()}
@@ -763,63 +784,69 @@ function wheelAnim(f,ms,cb){
 }
 
 /* GAME REGISTRY & NAVIGATION */
-const T={
+var T={
   slots:["🎰 Slots",slots,"Putar 3 gulungan keberuntungan · Jackpot x100","🎰"],
   bj:["🃏 Blackjack",bj,"Capai angka 21 tanpa melewati batas bandar","🃏"],
   vp:["♠ Video Poker",vp,"Jacks or Better · Kombinasi Royal Flush x250","♠"],
   hd:["♥ Hold’em",hold,"Texas Hold’em Poker melawan hingga 5 Bot AI","♥"],
   ro:["◎ Roulette",roul,"Roulette Eropa 37 angka dengan animasi roda","◎"]
 };
-$("#nv").innerHTML=Object.keys(T).map(k=>`<button data-k="${k}">${T[k][0]}</button>`).join("");
-$("#nv").onclick=e=>{
-  const btn=e.target.closest("button");if(!btn)return;
-  const k=btn.dataset.k;if(!k)return;
+$("#nv").innerHTML=Object.keys(T).map(function(k){return'<button type="button" data-k="'+k+'">'+T[k][0]+'</button>'}).join("");
+$("#nv").onclick=function(e){
+  var btn=e.target.closest("button");if(!btn)return;
+  var k=btn.dataset.k;if(!k)return;
   if(S.lock)return toast("Selesaikan ronde dulu");
   sfx("click");safeCleanupTable();S.g=k;save();go();
 };
 function go(){
-  [...$("#nv").children].forEach(b=>b.classList.toggle("on",b.dataset.k==S.g));
+  Array.prototype.forEach.call($("#nv").children,function(b){b.classList.toggle("on",b.dataset.k==S.g)});
   T[S.g][1]();
-  $("#nm").textContent=CH[S.g][0];const a=$("#av");a.textContent=CH[S.g][0][0];a.style.background=CH[S.g][1];
+  $("#nm").textContent=CH[S.g][0];var a=$("#av");a.textContent=CH[S.g][0][0];a.style.background=CH[S.g][1];
   say("greet");
 }
 
 /* === SISTEM MENU & SETTINGS GLOBAL === */
 function renderLobbyList(){
-  const list=$("#mmList");if(!list)return;
-  list.innerHTML=Object.keys(T).map(k=>{
-    const[title,,desc,ico]=T[k],dlr=CH[k];
-    return `<div class="gm-card" onclick="window.selectGame('${k}')">
-      <div class="gm-ico">${ico}</div>
-      <div class="gm-info">
-        <b>${title.replace(/^[^\s]+\s/,"")}</b>
-        <span>${desc}</span>
-        <div class="gm-dlr"><i style="background:${dlr[1]}"></i> Bandar: ${dlr[0]}</div>
-      </div>
-      <button class="bl" style="padding:8px 14px">Main</button>
-    </div>`;
+  var list=$("#mmList");if(!list)return;
+  list.innerHTML=Object.keys(T).map(function(k){
+    var item=T[k],title=item[0],desc=item[2],ico=item[3],dlr=CH[k];
+    return '<div class="gm-card" data-gm="'+k+'">'+
+      '<div class="gm-ico">'+ico+'</div>'+
+      '<div class="gm-info">'+
+        '<b>'+title.replace(/^[^\s]+\s/,"")+'</b>'+
+        '<span>'+desc+'</span>'+
+        '<div class="gm-dlr"><i style="background:'+dlr[1]+'"></i> Bandar: '+dlr[0]+'</div>'+
+      '</div>'+
+      '<button type="button" class="bl" style="padding:8px 14px">Main</button>'+
+    '</div>';
   }).join("");
+  Array.prototype.forEach.call(list.querySelectorAll(".gm-card"),function(card){
+    card.onclick=function(){
+      var k=card.getAttribute("data-gm");
+      sfx("click");safeCleanupTable();S.g=k;save();showScreen(null);go();
+    };
+  });
 }
 
 function showScreen(id){
-  ["loadScr","startScr","menuScr"].forEach(s=>{
-    const el=$("#"+s);if(el)el.classList.toggle("hid",s!==id);
+  $("#loadScr").classList.add("hid");
+  ["startScr","menuScr"].forEach(function(s){
+    var el=$("#"+s);if(el)el.classList.toggle("hid",s!==id);
   });
   draw();
 }
 
-window.enterStart=function(){sfx("click");showScreen("startScr")};
-window.startGameNow=function(){sfx("click");showScreen(null);go()};
-window.openLobbyNow=function(){
+$("#btnStartPlay").onclick=function(){sfx("click");showScreen(null);go()};
+$("#btnResume").onclick=function(){sfx("click");showScreen(null);go()};
+$("#btnStartLobby").onclick=function(){sfx("click");renderLobbyList();showScreen("menuScr")};
+$("#btnToMenu").onclick=function(){
   if(S.lock)return toast("Selesaikan ronde dulu sebelum ke Menu");
   sfx("click");safeCleanupTable();renderLobbyList();showScreen("menuScr");
 };
-window.selectGame=function(k){
-  sfx("click");safeCleanupTable();S.g=k;save();showScreen(null);go();
-};
+$("#btnMenuHome").onclick=function(){sfx("click");showScreen("startScr")};
 
 function getActiveVersion(){
-  const saved=DB.get("cw_ota_ver");
+  var saved=DB.get("cw_ota_v2_ver");
   return(saved&&compareVer(saved,APP_VERSION)>0)?saved:APP_VERSION;
 }
 
@@ -827,113 +854,113 @@ function syncSettingsUI(){
   if($("#setTheme"))$("#setTheme").value=S.theme;
   if($("#setSpd"))$("#setSpd").value=String(S.spd);
   if($("#curVerTxt"))$("#curVerTxt").textContent="v"+getActiveVersion();
-  const tgl=(id,v)=>{const b=$(id);if(b){b.textContent=v?"ON":"OFF";b.classList.toggle("on",!!v)}};
+  var tgl=function(id,v){var b=$(id);if(b){b.textContent=v?"ON":"OFF";b.classList.toggle("on",!!v)}};
   tgl("#setSfx",S.sfx);tgl("#setVib",S.vib);tgl("#setChat",S.chat);
 }
-window.openSettings=function(){
+function openSettings(){
   if(S.lock)return toast("Selesaikan ronde dulu");
   sfx("click");syncSettingsUI();$("#setMdl").classList.add("on");
-};
-window.closeSettings=function(){sfx("click");$("#setMdl").classList.remove("on")};
+}
+function closeSettings(){sfx("click");$("#setMdl").classList.remove("on")}
 
-$("#setTheme").onchange=e=>{theme(e.target.value)};
-$("#setSpd").onchange=e=>{S.spd=+e.target.value;save()};
-$("#setSfx").onclick=()=>{S.sfx=S.sfx?0:1;save();syncSettingsUI();sfx("click")};
-$("#setVib").onclick=()=>{S.vib=S.vib?0:1;save();syncSettingsUI();if(S.vib&&navigator.vibrate)navigator.vibrate(25)};
-$("#setChat").onclick=()=>{S.chat=S.chat?0:1;save();syncSettingsUI();sfx("click")};
-$("#setReset").onclick=()=>{
+$("#th").onclick=openSettings;
+$("#btnStartSet").onclick=openSettings;
+$("#btnMenuSet").onclick=openSettings;
+$("#btnCloseSet").onclick=closeSettings;
+$("#btnSaveSet").onclick=closeSettings;
+
+$("#setTheme").onchange=function(e){theme(e.target.value)};
+$("#setSpd").onchange=function(e){S.spd=+e.target.value;save()};
+$("#setSfx").onclick=function(){S.sfx=S.sfx?0:1;save();syncSettingsUI();sfx("click")};
+$("#setVib").onclick=function(){S.vib=S.vib?0:1;save();syncSettingsUI();if(S.vib&&navigator.vibrate)navigator.vibrate(25)};
+$("#setChat").onclick=function(){S.chat=S.chat?0:1;save();syncSettingsUI();sfx("click")};
+$("#setReset").onclick=function(){
   if(S.lock)return toast("Selesaikan ronde dulu");
   safeCleanupTable();S.bal=1000;S.peak=1000;S.rounds=0;S.streak=0;draw();save();
   if(S.g==="hd")hr();
-  window.closeSettings();toast("Semua data & saldo direset ke 1.000");
+  closeSettings();toast("Semua data & saldo direset ke 1.000");
 };
 
 /* === FUNGSI PENGECEKAN AUTO-UPDATE === */
-async function checkAppUpdate(isManual=false){
-  if(!UPDATE_JSON_URL){
+function checkAppUpdate(isManual){
+  if(!UPDATE_JSON_URL||typeof fetch==="undefined"){
     if(isManual)toast("Aplikasi versi terbaru (v"+getActiveVersion()+")");
-    return false;
+    return;
   }
   if(isManual)toast("Mengecek pembaruan ke server...");
 
-  let timer=null;
-  try{
-    const ctrl=typeof AbortController!=="undefined"?new AbortController():null;
-    if(ctrl)timer=setTimeout(()=>ctrl.abort(),2500);
-    const res=await fetch(UPDATE_JSON_URL+"?t="+Date.now(),ctrl?{signal:ctrl.signal,cache:"no-store"}:{cache:"no-store"});
-    if(timer)clearTimeout(timer);
-    if(!res.ok)throw new Error("Server tidak merespons");
-    const data=await res.json();
-    const currentVer=getActiveVersion();
-
-    if(compareVer(data.version,currentVer)>0){
-      if(data.type==="ota"&&data.ota_html_url){
-        const htmlRes=await fetch(data.ota_html_url+"?t="+Date.now(),{cache:"no-store"});
-        if(htmlRes.ok){
-          const newHtml=await htmlRes.text();
-          DB.set("cw_ota_ver",data.version);
-          DB.set("cw_ota_html",newHtml);
-          toast("Update v"+data.version+" terpasang! Memuat ulang...");
-          setTimeout(()=>location.reload(),800);
-          return true;
+  fetch(UPDATE_JSON_URL+"?t="+Date.now(),{cache:"no-store"})
+    .then(function(res){
+      if(!res.ok)throw new Error("Server error");
+      return res.json();
+    })
+    .then(function(data){
+      var currentVer=getActiveVersion();
+      if(compareVer(data.version,currentVer)>0){
+        if(data.type==="ota"&&data.ota_html_url){
+          fetch(data.ota_html_url+"?t="+Date.now(),{cache:"no-store"})
+            .then(function(r){return r.ok?r.text():null})
+            .then(function(newHtml){
+              if(newHtml&&newHtml.indexOf("<html")>=0){
+                DB.set("cw_ota_v2_ver",data.version);
+                DB.set("cw_ota_v2_html",newHtml);
+                toast("Update v"+data.version+" selesai! Memuat ulang...");
+                setTimeout(function(){location.reload()},800);
+              }
+            }).catch(function(){});
+          return;
         }
+        showUpdateModal(data);
+      }else{
+        if(isManual)toast("Aplikasi sudah versi terbaru (v"+currentVer+")");
       }
-      showUpdateModal(data);
-      return true;
-    }else{
-      if(isManual)toast("Aplikasi sudah versi terbaru (v"+currentVer+")");
-    }
-  }catch(err){
-    if(timer)clearTimeout(timer);
-    if(isManual)toast("Mode Offline · Tidak ada pembaruan ditemukan");
-  }
-  return false;
+    })
+    .catch(function(){
+      if(isManual)toast("Mode Offline · Tidak ada pembaruan ditemukan");
+    });
 }
 
 function showUpdateModal(data){
-  $("#updVer").textContent=`Versi Terbaru: v${data.version} (Saat ini: v${getActiveVersion()})`;
+  $("#updVer").textContent="Versi Terbaru: v"+data.version+" (Saat ini: v"+getActiveVersion()+")";
   $("#updLog").textContent=data.changelog||"• Perbaikan bug dan peningkatan performa permainan.";
   $("#btnSkipUpd").style.display=data.mandatory?"none":"block";
   $("#updMdl").classList.add("on");
 
-  $("#btnDoUpd").onclick=async()=>{
+  $("#btnDoUpd").onclick=function(){
     sfx("click");
     if(data.type==="ota"&&data.ota_html_url){
       $("#btnDoUpd").disabled=true;
       $("#updBarWrap").style.display="block";
       $("#updStatus").textContent="Mengunduh paket pembaruan...";
-      try{
-        const r=await fetch(data.ota_html_url+"?t="+Date.now(),{cache:"no-store"});
-        const h=await r.text();
-        DB.set("cw_ota_ver",data.version);
-        DB.set("cw_ota_html",h);
-        $("#updStatus").textContent="Berhasil! Memuat ulang aplikasi...";
-        setTimeout(()=>location.reload(),700);
-      }catch(e){
-        $("#btnDoUpd").disabled=false;
-        $("#updStatus").textContent="Gagal mengunduh. Periksa koneksi internet.";
-      }
+      fetch(data.ota_html_url+"?t="+Date.now(),{cache:"no-store"})
+        .then(function(r){return r.text()})
+        .then(function(h){
+          DB.set("cw_ota_v2_ver",data.version);
+          DB.set("cw_ota_v2_html",h);
+          $("#updStatus").textContent="Berhasil! Memuat ulang aplikasi...";
+          setTimeout(function(){location.reload()},700);
+        })
+        .catch(function(){
+          $("#btnDoUpd").disabled=false;
+          $("#updStatus").textContent="Gagal mengunduh. Periksa koneksi internet.";
+        });
     }else if(data.apk_download_url){
       $("#updStatus").textContent="Membuka pengunduhan APK baru...";
       window.location.href=data.apk_download_url;
     }
   };
 
-  $("#btnSkipUpd").onclick=()=>{
+  $("#btnSkipUpd").onclick=function(){
     sfx("click");
     $("#updMdl").classList.remove("on");
   };
 }
 
-$("#btnCheckUpd").onclick=()=>checkAppUpdate(true);
+$("#btnCheckUpd").onclick=function(){checkAppUpdate(true)};
 
-/* INISIALISASI OTOMATIS MASUK KE START MENU DALAM 900ms */
-S.g=T[S.g]?S.g:"slots";theme();draw();renderLobbyList();syncSettingsUI();
-setTimeout(()=>{
-  if(!$("#loadScr").classList.contains("hid")){
-    showScreen("startScr");
-  }
-},900);
+/* INISIALISASI LANGSUNG */
+S.g=T[S.g]?S.g:"slots";theme();draw();renderLobbyList();syncSettingsUI();go();
+setTimeout(function(){$("#loadScr").classList.add("hid")},1150);
 checkAppUpdate(false);
 </script>
 </body>
