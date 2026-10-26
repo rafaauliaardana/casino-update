@@ -34,7 +34,7 @@ button:active{transform:scale(.95)}button:disabled{opacity:.4;pointer-events:non
 .bl{background:var(--bl);color:var(--ink)}
 
 /* POPUP BANDAR DENGAN EFEK SHAKE */
-#tt{position:fixed;left:50%;bottom:76px;transform:translate(-50%,10px);width:calc(100vw - 24px);max-width:456px;background:var(--pn);border:1px solid var(--ln);border-radius:20px;padding:8px 14px;display:flex;gap:8px;align-items:center;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:20;box-shadow:0 4px 14px #0003;font-size:13px}
+#tt{position:fixed;left:50%;bottom:76px;transform:translate(-50%,10px);width:calc(100vw - 24px);max-width:456px;background:var(--pn);border:1px solid var(--ln);border-radius:20px;padding:8px 14px;display:flex;gap:8px;align-items:center;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:95;box-shadow:0 4px 14px #0003;font-size:13px}
 #tt.on{opacity:1;transform:translate(-50%,0);animation:ttShake .42s cubic-bezier(.36,.07,.19,.97)}
 @keyframes ttShake{
   0%{transform:translate(-50%,14px) scale(.92)}
@@ -67,19 +67,17 @@ select{font:inherit;border-radius:999px;border:1px solid var(--ln);background:va
 header>button{padding:8px 10px}
 .rr{display:flex;gap:10px;align-items:center;width:100%}.rb{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:20px;background:var(--p2);color:var(--tx);border:3px solid var(--gf);flex:none}.rb.r,.n.r{background:#c9525c;color:#fff}.rb.k,.n.k{background:#4a5266;color:#fff}.rb.g,.n.g{background:#3f9170;color:#fff}.rhh{display:flex;gap:4px;flex-wrap:wrap}.rhh i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}.rhh i.r{background:#c9525c}.rhh i.k{background:#4a5266}.rhh i.g{background:#3f9170}.bd{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;width:100%}.od{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;width:100%}.n{position:relative;border-radius:9px;padding:6px 0;font-size:13px;font-weight:700;background:var(--pn);color:var(--tx)}.n.g[data-k='0']{grid-column:1/-1}.n[data-c]::after{content:attr(data-c);position:absolute;top:-6px;right:-3px;background:var(--gf);color:var(--ink);border-radius:999px;font-size:10px;padding:1px 6px;font-weight:800;pointer-events:none}.n.w{outline:3px solid var(--gf)}
 
-/* === LAYAR MENU & LOADING (BEBAS BLOKIR KLIK) === */
+/* === LAYAR MENU & LOADING === */
 .scr{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
-.scr.hid{display:none!important;pointer-events:none!important}
-/* PENTING: pointer-events:none di #loadScr supaya TIDAK PERNAH memblokir klik di Start Menu */
-#loadScr{z-index:60;pointer-events:none!important;animation:autoHideLoad .25s ease .9s forwards}
+#loadScr{z-index:60;pointer-events:none!important;animation:autoHideLoad .25s ease .8s forwards}
 @keyframes autoHideLoad{to{opacity:0;visibility:hidden;display:none}}
 
-.card-box{width:100%;max-width:440px;background:var(--pn);border:1px solid var(--ln);border-radius:28px;padding:24px 18px;box-shadow:0 8px 28px #0003;text-align:center;position:relative;z-index:55}
+.card-box{width:100%;max-width:440px;background:var(--pn);border:1px solid var(--ln);border-radius:28px;padding:24px 18px;box-shadow:0 8px 28px #0003;text-align:center}
 .logo-badge{width:76px;height:76px;border-radius:24px;background:var(--fl);border:3px solid var(--gf);display:grid;place-items:center;font-size:38px;margin:0 auto 12px;box-shadow:0 4px 12px #0002}
 .title-lg{font-size:24px;font-weight:900;color:var(--gd);margin:0 0 4px;letter-spacing:.5px}
 .sub-lg{font-size:13px;color:var(--mu);margin:0 0 18px}
 .pbar-wrap{width:100%;height:12px;background:var(--p2);border-radius:999px;overflow:hidden;margin:14px 0 8px;border:1px solid var(--ln)}
-.pbar{height:100%;width:100%;background:linear-gradient(90deg,var(--fl),var(--gf));border-radius:999px;animation:cssFill .85s ease-out forwards}
+.pbar{height:100%;width:100%;background:linear-gradient(90deg,var(--fl),var(--gf));border-radius:999px;animation:cssFill .75s ease-out forwards}
 @keyframes cssFill{0%{width:5%}100%{width:100%}}
 .suit-anim{display:flex;gap:12px;justify-content:center;font-size:24px;margin:10px 0}
 .suit-anim span{animation:bnc .8s infinite alternate}
@@ -122,7 +120,7 @@ header>button{padding:8px 10px}
 </head>
 <body>
 
-<!-- 1. LOADING SCREEN (pointer-events:none sehingga tidak pernah memblokir sentuhan) -->
+<!-- 1. LOADING SCREEN -->
 <div class="scr" id="loadScr">
   <div class="card-box">
     <div class="logo-badge">♠</div>
@@ -134,8 +132,8 @@ header>button{padding:8px 10px}
   </div>
 </div>
 
-<!-- 2. START MENU (DENGAN ONCLICK INLINE LANGSUNG) -->
-<div class="scr" id="startScr">
+<!-- 2. START MENU -->
+<div class="scr" id="startScr" style="display:flex">
   <div class="card-box">
     <div class="logo-badge">🎰</div>
     <h1 class="title-lg">♠ CASINO OFFLINE</h1>
@@ -151,14 +149,14 @@ header>button{padding:8px 10px}
     </div>
     <button type="button" class="big" style="width:100%;margin:6px 0" onclick="uiPlayNow()">▶ MULAI BERMAIN</button>
     <div class="acts" style="margin-top:8px">
-      <button type="button" class="bl" onclick="uiOpenLobby()">📋 Pilih Meja</button>
-      <button type="button" onclick="uiOpenSet()">⚙️ Pengaturan</button>
+      <button type="button" class="bl" onclick="uiOpenLobby(true)">📋 Pilih Meja</button>
+      <button type="button" onclick="uiOpenSet(true)">⚙️ Pengaturan</button>
     </div>
   </div>
 </div>
 
 <!-- 3. MAIN MENU (LOBBY UTAMA) -->
-<div class="scr hid" id="menuScr">
+<div class="scr" id="menuScr" style="display:none">
   <div class="mm-wrap">
     <div class="mm-head">
       <div style="display:flex;align-items:center;gap:8px">
@@ -169,7 +167,7 @@ header>button{padding:8px 10px}
         </div>
       </div>
       <div style="display:flex;gap:6px">
-        <button type="button" onclick="uiOpenSet()" aria-label="Pengaturan">⚙️</button>
+        <button type="button" onclick="uiOpenSet(true)" aria-label="Pengaturan">⚙️</button>
         <button type="button" onclick="uiOpenHome()" aria-label="Layar Awal">🏠</button>
       </div>
     </div>
@@ -225,7 +223,7 @@ header>button{padding:8px 10px}
       <button type="button" class="bad" onclick="uiResetAll()">Reset ↺</button>
     </div>
     <div class="set-row">
-      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.4</small></div>
+      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.5</small></div>
       <button type="button" class="bl" onclick="checkAppUpdate(true)">Cek Update</button>
     </div>
     <button type="button" class="big" style="width:100%;margin:14px 0 0;padding:11px" onclick="uiCloseSet()">Simpan & Tutup</button>
@@ -249,11 +247,11 @@ header>button{padding:8px 10px}
 <!-- 6. GAME INTERFACE UTAMA -->
 <div class="wrap">
   <header>
-    <b class="lg" onclick="uiOpenLobby()" title="Kembali ke Main Menu">☰ MENU</b>
+    <b class="lg" onclick="uiOpenLobby(false)" title="Kembali ke Main Menu">☰ MENU</b>
     <div class="bal"><i id="dl"></i><span id="bal">1.000</span></div>
     <div class="step"><button type="button" id="bm" aria-label="Kurangi taruhan">−</button><span id="bet">10</span><button type="button" id="bp" aria-label="Tambah taruhan">+</button></div>
     <button type="button" id="rs" aria-label="Reset uang" title="Reset uang">↺</button>
-    <button type="button" onclick="uiOpenSet()" aria-label="Pengaturan" title="Pengaturan">⚙️</button>
+    <button type="button" onclick="uiOpenSet(false)" aria-label="Pengaturan" title="Pengaturan">⚙️</button>
   </header>
   <main id="g"></main>
 </div>
@@ -285,13 +283,12 @@ var DB = {
   }
 };
 
-// Bersihkan semua cache OTA lama yang sempat membuat layar tidak bisa diklik
 DB.del("cw_ota_ver");
 DB.del("cw_ota_html");
 DB.del("cw_ota_v2_ver");
 DB.del("cw_ota_v2_html");
 
-var APP_VERSION = "1.0.4";
+var APP_VERSION = "1.0.5";
 var UPDATE_JSON_URL = "https://raw.githubusercontent.com/rafaauliaardana/casino-update/main/version.json";
 
 function compareVer(v1, v2) {
@@ -314,7 +311,22 @@ var pick=function(a){return a[R(a.length)]};
 var $m=function(n){try{return Number(n).toLocaleString("id-ID")}catch(e){return String(n)}};
 var SU="♠♥♦♣",RK="23456789TJQKA";
 var S={bal:1000,peak:1000,rounds:0,bet:10,g:"slots",streak:0,theme:"auto",sfx:1,vib:1,chat:1,spd:1,lock:0};
-try{Object.assign(S,JSON.parse(DB.get("cw")||"{}"));S.lock=0}catch(e){}
+try{
+  var loaded=JSON.parse(DB.get("cw")||"{}");
+  if(loaded&&typeof loaded==="object"){
+    if(typeof loaded.bal==="number")S.bal=loaded.bal;
+    if(typeof loaded.peak==="number")S.peak=loaded.peak;
+    if(typeof loaded.rounds==="number")S.rounds=loaded.rounds;
+    if(typeof loaded.g==="string")S.g=loaded.g;
+    if(typeof loaded.theme==="string")S.theme=loaded.theme;
+    if(loaded.sfx!==undefined)S.sfx=loaded.sfx?1:0;
+    if(loaded.vib!==undefined)S.vib=loaded.vib?1:0;
+    if(loaded.chat!==undefined)S.chat=loaded.chat?1:0;
+    if(loaded.spd)S.spd=+loaded.spd||1;
+  }
+  S.lock=0;
+}catch(e){S.lock=0}
+
 var save=function(){try{if(S.bal>S.peak)S.peak=S.bal;DB.set("cw",JSON.stringify({bal:S.bal,peak:S.peak,rounds:S.rounds,g:S.g,theme:S.theme,sfx:S.sfx,vib:S.vib,chat:S.chat,spd:S.spd}))}catch(e){}};
 
 var actx=null;
@@ -360,8 +372,9 @@ function say(ev,mv,x){
   });
   if(!p.length){toast(mv);return}
   var t=pick(p).replace(/\{(\w+)\}/g,function(_,k){return $m(data[k])});
-  $("#nm").textContent=c[0];var a=$("#av");a.textContent=c[0][0];a.style.background=c[1];
-  var e=$("#tx");e.style.transition="none";e.style.opacity=0;e.textContent="“"+t+"”";void e.offsetWidth;e.style.transition="opacity .6s";e.style.opacity=1;
+  if($("#nm"))$("#nm").textContent=c[0];
+  var a=$("#av");if(a){a.textContent=c[0][0];a.style.background=c[1]}
+  var e=$("#tx");if(e){e.style.transition="none";e.style.opacity=0;e.textContent="“"+t+"”";void e.offsetWidth;e.style.transition="opacity .6s";e.style.opacity=1}
   toast(mv,t,c);
 }
 var moved=function(mv,ev,p,x){p=p===undefined?1:p;return Math.random()<p&&ev?say(ev,mv,x):toast(mv)};
@@ -374,7 +387,7 @@ function res(won,o,mv,x){
 }
 function pay(d){
   S.bal+=d;if(S.bal>S.peak)S.peak=S.bal;
-  if(d){var e=$("#dl");e.textContent=(d>0?"+":"−")+$m(Math.abs(d));e.className=d>0?"up":"dn";e.style.opacity=1;clearTimeout(pay.h);pay.h=setTimeout(function(){e.style.opacity=0},1400)}
+  if(d){var e=$("#dl");if(e){e.textContent=(d>0?"+":"−")+$m(Math.abs(d));e.className=d>0?"up":"dn";e.style.opacity=1;clearTimeout(pay.h);pay.h=setTimeout(function(){e.style.opacity=0},1400)}}
   draw();save();
 }
 function draw(){
@@ -394,6 +407,7 @@ function safeCleanupTable(){
     if(st>0)pay(st);
   }
   if(typeof roulRefund==="function")roulRefund();
+  S.lock=0;
 }
 
 var rc=0;
@@ -415,7 +429,7 @@ function slots(){
   var roll=function(f,cb){
     var done=0;
     [0,1,2].forEach(function(i){
-      var e=$("#r"+i),H=e.getBoundingClientRect().height||120,N=22,sy=[f[i]];
+      var e=$("#r"+i),H=(e&&e.clientHeight)||120,N=22,sy=[f[i]];
       for(var k=0;k<N-1;k++)sy.push(pick(P));
       e.innerHTML="<div class='rs'>"+sy.map(function(s){return "<span style='height:"+H+"px;color:"+CL[s]+"'>"+s+"</span>"}).join("")+"</div>";
       var st=e.firstChild,d=(1500+i*600)*S.spd,t0=performance.now();
@@ -802,72 +816,86 @@ var T={
 $("#nv").innerHTML=Object.keys(T).map(function(k){return'<button type="button" onclick="uiPickGame(\''+k+'\')" data-k="'+k+'">'+T[k][0]+'</button>'}).join("");
 
 function go(){
-  Array.prototype.forEach.call($("#nv").children,function(b){b.classList.toggle("on",b.dataset.k==S.g)});
-  T[S.g][1]();
-  $("#nm").textContent=CH[S.g][0];var a=$("#av");a.textContent=CH[S.g][0][0];a.style.background=CH[S.g][1];
+  if(!T[S.g])S.g="slots";
+  var nav=$("#nv");
+  if(nav){
+    var btns=nav.getElementsByTagName("button");
+    for(var i=0;i<btns.length;i++){
+      btns[i].className=(btns[i].getAttribute("data-k")===S.g)?"on":"";
+    }
+  }
+  try{T[S.g][1]()}catch(e){}
+  var dlr=CH[S.g]||CH.slots;
+  if($("#nm"))$("#nm").textContent=dlr[0];
+  var a=$("#av");if(a){a.textContent=dlr[0][0];a.style.background=dlr[1]}
   say("greet");
 }
 
-/* === FUNGSI NAVIGASI GLOBAL (DIPANGGIL LANGSUNG DARI ONCLICK HTML) === */
+/* === FUNGSI NAVIGASI LANGSUNG & ANTI-MACET === */
 function removeLoader(){
   var ld=document.getElementById("loadScr");
-  if(ld&&ld.parentNode)ld.parentNode.removeChild(ld);
+  if(ld)ld.style.display="none";
 }
 
 function renderLobbyList(){
-  var list=$("#mmList");if(!list)return;
-  list.innerHTML=Object.keys(T).map(function(k){
-    var item=T[k],title=item[0],desc=item[2],ico=item[3],dlr=CH[k];
-    return '<div class="gm-card" onclick="uiPickGame(\''+k+'\')">'+
+  var list=document.getElementById("mmList");
+  if(!list)return;
+  var html="";
+  var keys=Object.keys(T);
+  for(var i=0;i<keys.length;i++){
+    var k=keys[i],item=T[k],title=item[0],desc=item[2],ico=item[3],dlr=CH[k];
+    html+='<div class="gm-card" onclick="uiPickGame(\''+k+'\')">'+
       '<div class="gm-ico">'+ico+'</div>'+
       '<div class="gm-info">'+
         '<b>'+title.replace(/^[^\s]+\s/,"")+'</b>'+
         '<span>'+desc+'</span>'+
         '<div class="gm-dlr"><i style="background:'+dlr[1]+'"></i> Bandar: '+dlr[0]+'</div>'+
       '</div>'+
-      '<button type="button" class="bl" style="padding:8px 14px">Main</button>'+
+      '<button type="button" class="bl" style="padding:8px 14px" onclick="event.stopPropagation();uiPickGame(\''+k+'\')">Main</button>'+
     '</div>';
-  }).join("");
-}
-
-function showScreen(id){
-  removeLoader();
-  ["startScr","menuScr"].forEach(function(s){
-    var el=document.getElementById(s);
-    if(el){
-      if(s===id){el.classList.remove("hid");el.style.display="flex"}
-      else{el.classList.add("hid");el.style.display="none"}
-    }
-  });
-  draw();
+  }
+  list.innerHTML=html;
 }
 
 window.uiPlayNow=function(){
+  removeLoader();
+  document.getElementById("startScr").style.display="none";
+  document.getElementById("menuScr").style.display="none";
+  S.lock=0;
   sfx("click");
-  showScreen(null);
+  draw();
   go();
 };
 
-window.uiOpenLobby=function(){
-  if(S.lock)return toast("Selesaikan ronde dulu sebelum ke Menu");
-  sfx("click");
+window.uiOpenLobby=function(force){
+  if(!force&&S.lock)return toast("Selesaikan ronde dulu sebelum ke Menu");
+  removeLoader();
   safeCleanupTable();
   renderLobbyList();
-  showScreen("menuScr");
+  draw();
+  document.getElementById("startScr").style.display="none";
+  document.getElementById("menuScr").style.display="flex";
+  sfx("click");
 };
 
 window.uiOpenHome=function(){
+  removeLoader();
+  safeCleanupTable();
+  document.getElementById("menuScr").style.display="none";
+  document.getElementById("startScr").style.display="flex";
   sfx("click");
-  showScreen("startScr");
 };
 
 window.uiPickGame=function(k){
-  if(S.lock)return toast("Selesaikan ronde dulu");
-  sfx("click");
+  removeLoader();
   safeCleanupTable();
-  S.g=k;
+  S.g=T[k]?k:"slots";
+  S.lock=0;
   save();
-  showScreen(null);
+  document.getElementById("startScr").style.display="none";
+  document.getElementById("menuScr").style.display="none";
+  sfx("click");
+  draw();
   go();
 };
 
@@ -879,8 +907,8 @@ function syncSettingsUI(){
   tgl("#setSfx",S.sfx);tgl("#setVib",S.vib);tgl("#setChat",S.chat);
 }
 
-window.uiOpenSet=function(){
-  if(S.lock)return toast("Selesaikan ronde dulu");
+window.uiOpenSet=function(force){
+  if(!force&&S.lock)return toast("Selesaikan ronde dulu");
   sfx("click");
   syncSettingsUI();
   document.getElementById("setMdl").classList.add("on");
@@ -897,7 +925,6 @@ window.uiToggleSfx=function(){S.sfx=S.sfx?0:1;save();syncSettingsUI();sfx("click
 window.uiToggleVib=function(){S.vib=S.vib?0:1;save();syncSettingsUI();if(S.vib&&navigator.vibrate)navigator.vibrate(25)};
 window.uiToggleChat=function(){S.chat=S.chat?0:1;save();syncSettingsUI();sfx("click")};
 window.uiResetAll=function(){
-  if(S.lock)return toast("Selesaikan ronde dulu");
   safeCleanupTable();S.bal=1000;S.peak=1000;S.rounds=0;S.streak=0;draw();save();
   if(S.g==="hd")hr();
   window.uiCloseSet();toast("Semua data & saldo direset ke 1.000");
@@ -940,14 +967,33 @@ function showUpdateModal(data){
       $("#updStatus").textContent="Membuka pengunduhan APK baru...";
       window.location.href=data.apk_download_url;
     }else if(data.ota_html_url){
-      window.location.href=data.ota_html_url+"?t="+Date.now();
+      $("#btnDoUpd").disabled=true;
+      $("#updStatus").textContent="Mengunduh pembaruan...";
+      fetch(data.ota_html_url+"?t="+Date.now(),{cache:"no-store"})
+        .then(function(r){return r.text()})
+        .then(function(h){
+          $("#updMdl").classList.remove("on");
+          toast("Pembaruan v"+data.version+" berhasil diterapkan!");
+          APP_VERSION=data.version;
+          if($("#curVerTxt"))$("#curVerTxt").textContent="v"+APP_VERSION;
+        })
+        .catch(function(){
+          $("#btnDoUpd").disabled=false;
+          $("#updStatus").textContent="Gagal mengunduh. Periksa koneksi.";
+        });
     }
   };
 }
 
-/* INISIALISASI LANGSUNG & HAPUS ELEMEN LOADING SETELAH 900ms */
-S.g=T[S.g]?S.g:"slots";theme();draw();renderLobbyList();syncSettingsUI();go();
-setTimeout(removeLoader,900);
+/* INISIALISASI AWAL */
+S.g=T[S.g]?S.g:"slots";
+S.lock=0;
+theme();
+draw();
+renderLobbyList();
+syncSettingsUI();
+go();
+setTimeout(removeLoader,850);
 checkAppUpdate(false);
 </script>
 </body>
