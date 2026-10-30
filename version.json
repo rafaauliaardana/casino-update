@@ -1,8 +1,8 @@
 {
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "ota",
   "mandatory": true,
-  "changelog": "• Penambahan fitur baru\n• Perbaikan bug",
+  "changelog": "• Penambahan fitur baruuuuuu\n• Perbaikan buggggggg",
   "ota_html_url": "https://raw.githubusercontent.com/rafaauliaardana/casino-update/main/index.html",
   "apk_download_url": ""
 }
