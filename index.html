@@ -223,7 +223,7 @@ header>button{padding:8px 10px}
       <button type="button" class="bad" onclick="uiResetAll()">Reset ↺</button>
     </div>
     <div class="set-row">
-      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.7</small><small id="hzTxt" style="display:block"></small></div>
+      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.8</small><small id="hzTxt" style="display:block"></small></div>
       <button type="button" class="bl" onclick="checkAppUpdate(true)">Cek Update</button>
     </div>
     <button type="button" class="big" style="width:100%;margin:14px 0 0;padding:11px" onclick="uiCloseSet()">Simpan & Tutup</button>
@@ -288,7 +288,7 @@ DB.del("cw_ota_html");
 DB.del("cw_ota_v2_ver");
 DB.del("cw_ota_v2_html");
 
-var APP_VERSION = "1.0.7";
+var APP_VERSION = "1.0.8";
 var UPDATE_JSON_URL = "https://raw.githubusercontent.com/rafaauliaardana/casino-update/main/version.json";
 
 function compareVer(v1, v2) {
@@ -444,7 +444,7 @@ function slots(){
   $("#go").onclick=function(){
     if(S.lock||!can())return;
     sfx("click");
-    var b=S.bet,risky=b*2>=S.bal,f=[pick(P),pick(P),pick(P)];
+    var b=S.bet,risky=b*2>=S.bal,f=RG.slots(P);
     S.lock=1;pay(-b);moved("PUTAR "+$m(b),"move_spin",.6,{taruhan:b});
     roll(f,function(){
       var a=f[0],c=f[1],d=f[2],m=a==c&&c==d?PY[a]:(a==c||c==d||a==d)?.5:0,w=Math.floor(b*m);
@@ -481,10 +481,10 @@ function bj(){
     else{S.rounds--;res(k=="w",{bl:bad},mv,txObj)}
     rd();
   }
-  function dp(mv){hide=0;while(v(dl)<17)dl.push(dk.pop());var p=v(pl),d=v(dl);d>21?fin("db",2,mv):p>d?fin("w",2,mv):p<d?fin("l",0,mv):fin("p",1,mv)}
+  function dp(mv){hide=0;while(v(dl)<17)dl.push(RG.rw==null?dk.pop():RG.card(dk,dl,v,RG.rw==0));var p=v(pl),d=v(dl);d>21?fin("db",2,mv):p>d?fin("w",2,mv):p<d?fin("l",0,mv):fin("p",1,mv)}
   $("#d").onclick=function(){
     if(S.lock||!can())return;sfx("card");
-    bet=S.bet;bad=bet*2>=S.bal;pay(-bet);S.lock=1;dk=deck(4);pl=[dk.pop(),dk.pop()];dl=[dk.pop(),dk.pop()];hide=1;
+    bet=S.bet;bad=bet*2>=S.bal;RG.rw=RG.want();pay(-bet);S.lock=1;dk=deck(4);pl=[dk.pop(),dk.pop()];dl=[dk.pop(),dk.pop()];hide=1;
     $("#m").textContent="Hit, Stand, atau Double?";
     if(v(pl)==21){hide=0;v(dl)==21?fin("p",1,"DEAL"):fin("bj",2.5,"DEAL")}
     else{rd();moved("DEAL "+$m(bet),"move_deal",.7,{taruhan:bet})}
@@ -492,13 +492,13 @@ function bj(){
   $("#h").onclick=function(){
     if(!on())return;sfx("card");
     var h=v(pl);if(h>=19||(h>=17&&!soft(pl)))bad=1;
-    pl.push(dk.pop());var t=v(pl);
+    pl.push(RG.rw==null?dk.pop():RG.card(dk,pl,v,RG.rw==1));var t=v(pl);
     t>21?fin("b",0,"HIT"):t==21?(bad=bad||0,dp("HIT")):(rd(),moved("HIT","move_hit",.7));
   };
   $("#s").onclick=function(){if(!on())return;sfx("click");if(v(pl)<=11)bad=1;dp("STAND")};
   $("#x").onclick=function(){
     if(!on()||pl.length!=2||S.bal<bet)return;sfx("card");
-    if(v(pl)>=17&&!soft(pl))bad=1;pay(-bet);bet*=2;pl.push(dk.pop());
+    if(v(pl)>=17&&!soft(pl))bad=1;pay(-bet);bet*=2;pl.push(RG.rw==null?dk.pop():RG.card(dk,pl,v,RG.rw==1));
     moved("DOUBLE "+$m(bet),"move_double",.5,{taruhan:bet});
     v(pl)>21?fin("b",0,"DOUBLE"):dp("DOUBLE");
   };
@@ -536,7 +536,7 @@ function vp(){
       $("#go").textContent="DRAW";$("#m").textContent="Ketuk kartu untuk HOLD, lalu DRAW";rd();moved("DEAL "+$m(bet),"move_deal",.7,{taruhan:bet});
     }else{
       sfx("card");
-      var b=blun(h,hd);h=h.map(function(c,i){return hd[i]?c:dk.pop()});hd=[0,0,0,0,0];ph=0;S.lock=0;$("#go").textContent="DEAL";
+      var b=blun(h,hd);h=RG.vp(h,hd,dk,rank);hd=[0,0,0,0,0];ph=0;S.lock=0;$("#go").textContent="DEAL";
       var r=rank(h),m=r?PT[r]:0,w=bet*m;pay(w);rd();
       $("#m").textContent=r?r+"!  +"+$m(w):"Tidak ada kombinasi. Kalah.";
       res(m>1,{big:m>=6,bl:b,push:m==1},"DRAW",{taruhan:w||bet});
@@ -757,7 +757,7 @@ function roul(){
   };
   $('#sp').onclick=function(){
     if(busy||!tot())return;sfx("card");
-    var st=tot(),risky=st>=.5*(S.bal+st),f=R(37);
+    var st=tot(),risky=st>=.5*(S.bal+st),f=RG.roul(bets,O,st);
     busy=1;win=null;sh=null;rd();
     moved('PUTAR '+$m(st),'move_spin',.7,{taruhan:st});
     wheelAnim(f,4200*S.spd,function(){
@@ -812,6 +812,26 @@ function wheelAnim(f,ms,cb){
     if(p<1)requestAnimationFrame(fr);else{WS.run=0;WS.f=f;wheelDraw();if(cb)cb()}
   })(t0);
 }
+
+/* === DEV: kontrol peluang (tersembunyi) === */
+var RG={on:0,p:50,rw:null};
+try{var _q=JSON.parse(DB.get("cw_rg")||"{}");if(_q&&typeof _q==="object"){RG.on=!!_q.on;if(typeof _q.p==="number")RG.p=_q.p}}catch(e){}
+RG.want=function(){return RG.on?(Math.random()*100<RG.p?1:0):null};
+RG.slots=function(P){var w=RG.want(),f;for(var i=0;i<400;i++){f=[pick(P),pick(P),pick(P)];if(w===null||(f[0]==f[1]&&f[1]==f[2])==!!w)break}return f};
+RG.roul=function(bets,O,st){var w=RG.want();if(w===null)return R(37);var ok=[];for(var n=0;n<37;n++){var s=0;Object.keys(bets).forEach(function(k){var a=bets[k];s+=isNaN(k)?(O[k][2](n)?a*O[k][3]:0):(+k===n?a*36:0)});if((s>st)==!!w)ok.push(n)}return ok.length?pick(ok):R(37)};
+RG.vp=function(h,hd,dk,rank){var w=RG.want(),ix=[],h2;h.forEach(function(c,i){if(!hd[i])ix.push(i)});
+  for(var t=0;t<300;t++){sh(dk);h2=h.slice();ix.forEach(function(i,j){h2[i]=dk[dk.length-1-j]});if(w===null)break;var r=rank(h2),win=r!==""&&r!=="Jacks or Better";if(win==!!w&&(w==1||r===""))break}
+  dk.splice(dk.length-ix.length,ix.length);return h2};
+RG.card=function(dk,h,v,high){var b=dk.length-1,bs=null;for(var i=dk.length-1;i>=Math.max(0,dk.length-14);i--){var t=v(h.concat([dk[i]])),s=t>21?-1000:t;if(bs===null||(high?s>bs:s<bs)){bs=s;b=i}}return dk.splice(b,1)[0]};
+RG.sync=function(){var m=document.getElementById("rgMdl");if(!m)return;var t=m.querySelector("#rgT");t.textContent=RG.on?"ON":"OFF";t.classList.toggle("on",!!RG.on);m.querySelector("#rgS").value=RG.p;m.querySelector("#rgV").textContent=RG.on?RG.p+"% menang":"Adil (acak biasa)";DB.set("cw_rg",JSON.stringify({on:RG.on,p:RG.p}))};
+RG.open=function(){var m=document.getElementById("rgMdl");
+  if(!m){m=document.createElement("div");m.id="rgMdl";m.className="mdl-bg";
+    m.innerHTML="<div class='mdl'><div class='mdl-hd'><b>🛠 Dev</b><button type='button' id='rgX' style='padding:4px 10px'>✕</button></div><div class='set-row'><div><b>Atur peluang menang</b><small>Hanya untuk uji coba</small></div><button type='button' class='tgl' id='rgT'></button></div><div class='set-row'><div><b>Target menang</b><small id='rgV'></small></div><input type='range' id='rgS' min='0' max='100' step='5' style='width:46%'></div><p style='font-size:11px;color:var(--mu);margin:10px 0 0'>Berlaku: Slots, Roulette, Video Poker, Blackjack. Hold’em tetap acak biasa.</p></div>";
+    document.body.appendChild(m);
+    m.querySelector("#rgX").onclick=function(){m.classList.remove("on")};
+    m.querySelector("#rgT").onclick=function(){RG.on=RG.on?0:1;RG.sync()};
+    m.querySelector("#rgS").oninput=function(){RG.p=+this.value;RG.sync()}}
+  RG.sync();m.classList.add("on")};
 
 /* GAME REGISTRY & NAVIGATION */
 var T={
@@ -997,6 +1017,7 @@ function showUpdateModal(data){
 function measureHz(){var el=document.getElementById("hzTxt");if(!el||measureHz.b)return;measureHz.b=1;el.textContent="Layar: mengukur…";var d=[],l=0;
   (function f(t){if(l)d.push(t-l);l=t;if(d.length<50)requestAnimationFrame(f);else{d.sort(function(a,b){return a-b});var hz=1000/d[25],k=[30,48,60,72,90,120,144,165],b=k[0];k.forEach(function(x){if(Math.abs(x-hz)<Math.abs(b-hz))b=x});el.textContent="Layar terdeteksi: ~"+b+" Hz";measureHz.b=0}})(performance.now())}
 var _os=window.uiOpenSet;window.uiOpenSet=function(f){_os(f);measureHz()};
+(function(){var t=0,c=0,e=document.getElementById("curVerTxt");if(e)e.addEventListener("click",function(){var n=Date.now();if(n-t>4000)c=0;t=n;if(++c>=7){c=0;RG.open()}})})();
 /* INISIALISASI AWAL */
 S.g=T[S.g]?S.g:"slots";
 S.lock=0;
