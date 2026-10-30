@@ -223,7 +223,7 @@ header>button{padding:8px 10px}
       <button type="button" class="bad" onclick="uiResetAll()">Reset ↺</button>
     </div>
     <div class="set-row">
-      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.5</small></div>
+      <div><b>Versi Aplikasi</b><small id="curVerTxt">v1.0.7</small><small id="hzTxt" style="display:block"></small></div>
       <button type="button" class="bl" onclick="checkAppUpdate(true)">Cek Update</button>
     </div>
     <button type="button" class="big" style="width:100%;margin:14px 0 0;padding:11px" onclick="uiCloseSet()">Simpan & Tutup</button>
@@ -288,7 +288,7 @@ DB.del("cw_ota_html");
 DB.del("cw_ota_v2_ver");
 DB.del("cw_ota_v2_html");
 
-var APP_VERSION = "1.0.6";
+var APP_VERSION = "1.0.7";
 var UPDATE_JSON_URL = "https://raw.githubusercontent.com/rafaauliaardana/casino-update/main/version.json";
 
 function compareVer(v1, v2) {
@@ -774,8 +774,8 @@ function roul(){
   rd();
 }
 var WO=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26],WS={a:0,run:0,f:undefined},WA=2*Math.PI/37;
-function wf(wa,ba,br){
-  var c=document.getElementById('wl');if(!c)return;
+function wfFull(wa,ba,br,cv){
+  var c=cv||document.getElementById('wl');if(!c)return;
   var x=c.getContext('2d'),cx=c.width/2,R0=cx-4,R1=R0*.74,R2=R0*.52;
   x.clearRect(0,0,c.width,c.width);x.save();x.translate(cx,cx);x.rotate(wa);
   WO.forEach(function(n,i){
@@ -792,6 +792,14 @@ function wf(wa,ba,br){
     x.arc(cx+br*q*Math.cos(ba),cx+br*q*Math.sin(ba),6*q,0,7);
     x.fillStyle='#fff';x.fill();x.strokeStyle='#0007';x.lineWidth=1.5;x.stroke();
   }
+}
+var WSP=null;
+function wf(wa,ba,br){
+  var c=document.getElementById('wl');if(!c)return;
+  if(!WSP||WSP.width!==c.width){WSP=document.createElement('canvas');WSP.width=WSP.height=c.width;wfFull(0,null,0,WSP)}
+  var x=c.getContext('2d'),cx=c.width/2;
+  x.clearRect(0,0,c.width,c.width);x.save();x.translate(cx,cx);x.rotate(wa);x.drawImage(WSP,-cx,-cx);x.restore();
+  if(ba!==null){x.beginPath();var q=(cx-4)/116;x.arc(cx+br*q*Math.cos(ba),cx+br*q*Math.sin(ba),6*q,0,7);x.fillStyle='#fff';x.fill();x.strokeStyle='#0007';x.lineWidth=1.5;x.stroke()}
 }
 var pkA=function(f){return WO.indexOf(f)*WA-Math.PI/2};
 function wheelDraw(){if(WS.run)return;wf(WS.a,WS.f===undefined?null:WS.a+pkA(WS.f),97)}
@@ -986,6 +994,9 @@ function showUpdateModal(data){
   };
 }
 
+function measureHz(){var el=document.getElementById("hzTxt");if(!el||measureHz.b)return;measureHz.b=1;el.textContent="Layar: mengukur…";var d=[],l=0;
+  (function f(t){if(l)d.push(t-l);l=t;if(d.length<50)requestAnimationFrame(f);else{d.sort(function(a,b){return a-b});var hz=1000/d[25],k=[30,48,60,72,90,120,144,165],b=k[0];k.forEach(function(x){if(Math.abs(x-hz)<Math.abs(b-hz))b=x});el.textContent="Layar terdeteksi: ~"+b+" Hz";measureHz.b=0}})(performance.now())}
+var _os=window.uiOpenSet;window.uiOpenSet=function(f){_os(f);measureHz()};
 /* INISIALISASI AWAL */
 S.g=T[S.g]?S.g:"slots";
 S.lock=0;
